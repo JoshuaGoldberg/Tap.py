@@ -2,6 +2,7 @@ import pygame
 from workerMenuUI import *
 from button import *
 from upgradeUI import *
+from infoUI import *
 
 
 class UI:
@@ -15,7 +16,8 @@ class UI:
         self.font = pygame.font.SysFont(None, 48)
         self.font_small = pygame.font.SysFont(None, 32)
         self.font_popup = pygame.font.SysFont(None, 25)
-        self.MIDDLE_SECTION_VALUES = (200, 75)
+        self.cursor_img = pygame.image.load('assets/cursor.png').convert_alpha()
+        self.cursor_img2 = pygame.image.load('assets/cursor_2.png').convert_alpha()
 
         self.button_width = 150
         self.button_height = 60
@@ -43,15 +45,6 @@ class UI:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
 
-            if self.layer == 0:
-
-                if self.game.workers_enabled:
-
-                    for worker in self.game.workers:
-                        if worker.page() == self.game.worker_page:
-                            if worker.button is not None and worker.button.collidepoint(mouse_pos):
-                                self.game.selectedWorker = worker
-
     def draw(self):
 
         mouse_pos = pygame.mouse.get_pos()
@@ -71,9 +64,12 @@ class UI:
             upgradeScreen.draw(self.screen, self.layer)
 
         if self.game.workers_enabled:
-
             self.worker_button.draw(self.screen, self.layer)
             workerScreen = WorkerMenuUI(850 + 175, 250 + 335, self.game)
             workerScreen.draw(self.screen, self.layer)
+            infoScreen = InfoUI(1575, 250 + 335, self.game)
+            infoScreen.draw(self.screen, 0)
 
+        cursor = UIElement(mouse_pos[0] + 32, mouse_pos[1] + 32, self.cursor_img, 2.0)
+        cursor.draw(self.screen)
 

@@ -34,8 +34,8 @@ class Button:
             self.clicked = False
             Button.pressed = False
 
-    def handlePopup(self, surface):
+    def handlePopup(self, surface, layer):
         pos = pygame.mouse.get_pos()
-        if self.rect.collidepoint(pos):
+        if self.rect.collidepoint(pos) and self.layer == layer:
             if self.popup is not None:
-                surface.blit(self.popup, (pos[0] + 15, pos[1]))
+                surface.blit(self.popup, (pos[0] + 60, pos[1]))

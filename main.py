@@ -14,6 +14,7 @@ def main():
 
     clock = pygame.time.Clock()
     running = True
+    pygame.mouse.set_visible(False)
     while running:
         clock.tick(60)
         for event in pygame.event.get():

@@ -11,3 +11,5 @@ class UIElement:
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
+        
+

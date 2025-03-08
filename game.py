@@ -59,12 +59,22 @@ class Game:
             self.workers.append(worker)
             self.curr_id += 1
 
+    def sell_worker(self, worker):
+        self.workers.remove(worker)
+        self.selectedWorker = None
+
     def process_upgrade(self, upgrade):
         if self.value >= upgrade.cost:
             self.value -= upgrade.cost
             upgrade.execute(self)
             self.upgrades.remove(upgrade)
             self.bought_upgrades.append(upgrade)
+
+    def select_worker(self, worker):
+        self.selectedWorker = worker
+
+    def set_worker_status(self, status):
+        self.selectedWorker.current_activity = status
 
     def forward_page(self):
         if len(self.workers) > self.worker_page * 45:

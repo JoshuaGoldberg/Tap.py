@@ -33,4 +33,6 @@ class UpgradeUI:
                 offset_y += 80
 
         for button in tempStore:
-            button.handlePopup(surface)
+            button.handlePopup(surface, layer)
+
+
