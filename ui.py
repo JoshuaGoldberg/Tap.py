@@ -11,7 +11,6 @@ class UI:
         self.height = height
         self.screen = screen
         self.game = game
-        self.layer = 0
 
         self.font = pygame.font.SysFont(None, 48)
         self.font_small = pygame.font.SysFont(None, 32)
@@ -53,7 +52,7 @@ class UI:
         backdrop = UIElement(960, 540, backdrop_img, 17.0)
         backdrop.draw(self.screen)
 
-        self.click_button.draw(self.screen, self.layer)
+        self.click_button.draw(self.screen, self.game.layer)
 
         rounded_value = str(int(self.game.value))
         value_text = self.font.render(f"Value: {rounded_value}", True, (255, 255, 255))
@@ -61,15 +60,14 @@ class UI:
 
         if self.game.total_value >= 50:
             upgradeScreen = UpgradeUI(300, 250, self.game)
-            upgradeScreen.draw(self.screen, self.layer)
+            upgradeScreen.draw(self.screen, self.game.layer)
 
         if self.game.workers_enabled:
-            self.worker_button.draw(self.screen, self.layer)
+            self.worker_button.draw(self.screen, self.game.layer)
             workerScreen = WorkerMenuUI(850 + 175, 250 + 335, self.game)
-            workerScreen.draw(self.screen, self.layer)
+            workerScreen.draw(self.screen, self.game.layer)
             infoScreen = InfoUI(1575, 250 + 335, self.game)
-            infoScreen.draw(self.screen, 0)
+            infoScreen.draw(self.screen, self.game.layer)
 
         cursor = UIElement(mouse_pos[0] + 32, mouse_pos[1] + 32, self.cursor_img, 2.0)
         cursor.draw(self.screen)
-

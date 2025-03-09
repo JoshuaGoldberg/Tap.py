@@ -15,6 +15,10 @@ def enable_workers_wrapper(game):
     game.enable_workers()
 
 
+def double_gather_xp_wrapper(game):
+    game.double_gathering_xp()
+
+
 def get_upgrades():
     iron_grip_img = pygame.image.load('assets/iron_upgrade.png').convert_alpha()
     magic_stone_img = pygame.image.load('assets/magic_stone.png').convert_alpha()
@@ -22,6 +26,7 @@ def get_upgrades():
     herbs_img = pygame.image.load('assets/herbs.png').convert_alpha()
     double_img = pygame.image.load('assets/double_click.png').convert_alpha()
     jobs_img = pygame.image.load('assets/jobs.png').convert_alpha()
+    basket_img = pygame.image.load('assets/basket.png').convert_alpha()
 
     future_upgrades = []
     bought_upgrades = []
@@ -62,6 +67,7 @@ def get_upgrades():
         increase_click_power_wrapper,
         double_img
     )
+
     enable_workers = Upgrade(
         15000,
         "Job Listings",
@@ -71,8 +77,17 @@ def get_upgrades():
         jobs_img
     )
 
+    baskets = Upgrade(
+        10000,
+        "Berry Baskets",
+        ["Cost: " + str(10000), "Double Gathering XP Rate", "\"Storage innovations",
+         "mean workers can hold more", "for longer\""],
+        double_gather_xp_wrapper,
+        basket_img
+    )
+
     future_upgrades.extend([
         base_click_double_1, base_click_double_2, flat_click_power_1,
-        flat_click_power_2, flat_click_power_3, enable_workers
+        flat_click_power_2, flat_click_power_3, enable_workers, baskets
     ])
     return future_upgrades, bought_upgrades
