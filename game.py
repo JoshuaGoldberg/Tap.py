@@ -31,7 +31,7 @@ class Game:
         strange_rock_img = pygame.image.load('assets/strange_rock.png').convert_alpha()
 
         BlueBerry = Item(blue_item_img, "Blue Berry",
-                         "A blue berry. A type of berry that happens to be blue. "
+                         "A blue berry. "
                          "Note: not a red berry, although it's easy to get confused",
                          lambda: None, lambda: None, self)
         StrangeRock = Item(strange_rock_img, "Strange Rock",

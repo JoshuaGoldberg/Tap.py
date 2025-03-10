@@ -5,6 +5,7 @@ from button import Button
 from popup import *
 from text_wrapper import *
 
+
 class InventoryUI:
     def __init__(self, x, y, game):
         self.offset = (x, y)
@@ -18,9 +19,10 @@ class InventoryUI:
         offset_y = 0
 
         self.inventoryBase.draw(surface)
-        font = pygame.font.SysFont(None, 48)
-        tab_text = font.render(self.game.inventory_tab, True, (0, 0, 0))
-        surface.blit(tab_text, (self.offset[0] - 785, self.offset[1] - 330))
+        font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 32)
+        font2 = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 48)
+        tab_text = font2.render(self.game.inventory_tab, True, (0, 0, 0))
+        surface.blit(tab_text, (self.offset[0] - 785, self.offset[1] - 350))
         x_img = pygame.image.load('assets/x.png').convert_alpha()
         exitButton = Button(self.offset[0] + 720, self.offset[1] - 415, x_img, 2.0,
                             lambda: self.game.exit_layer(), None, 1)
@@ -56,7 +58,7 @@ class InventoryUI:
                                lambda: None, None, 1)
             item_icon.draw(surface, layer)
             item_name = font.render(self.game.selected_item.name, True, (255, 255, 255))
-            surface.blit(item_name, (self.offset[0] + 470, self.offset[1]))
+            surface.blit(item_name, (self.offset[0] + 470, self.offset[1] - 15))
             text = text_wrapper.render_text_list(
                 text_wrapper.wrap_text(self.game.selected_item.description, font, 275), font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
