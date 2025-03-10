@@ -39,36 +39,35 @@ def get_upgrades():
     base_click_double_1 = Upgrade(
         150,
         "Iron Grip",
-        ["Cost: " + str(150), "Doubles value per click.", "It turns out the secret to success",
-         "is all in the handwork."],
+        "Cost: " + str(15) + "\nDoubles value per click.\nIt turns out the secret to success is all in the handwork.",
         double_base_clicks_wrapper,
         iron_grip_img
     )
     base_click_double_2 = Upgrade(
         1000,
         "Magic Stones",
-        ["Cost: " + str(1000), "Doubles value per click.", "Forest pebbles are apparently", "magically blessed."],
+        "Cost: " + str(1000) + "\nDoubles value per click.\nForest pebbles are apparently magically blessed.",
         double_base_clicks_wrapper,
         magic_stone_img
     )
     flat_click_power_1 = Upgrade(
         1000,
         "Strength Training",
-        ["Cost: " + str(1000), "+1 to click power.", "Clicking through the power of lifting."],
+        "Cost: " + str(1000) + "\n+1 to click power.\nClicking through the power of lifting.",
         increase_click_power_wrapper,
         strength_img
     )
     flat_click_power_2 = Upgrade(
         2500,
         "Medicinal Herbs",
-        ["Cost: " + str(2500), "+1 to click power.", "9/10 Mages recommend!"],
+        "Cost: " + str(2500) + "\n+1 to click power.\n9/10 Mages recommend!",
         increase_click_power_wrapper,
         herbs_img
     )
     flat_click_power_3 = Upgrade(
         10000,
         "Multi-finger mode",
-        ["Cost: " + str(10000), "+1 to click power.", "+1 finger equates to", "+1 click power"],
+        "Cost: " + str(10000) + "\n+1 to click power.\n+1 finger equates to +1 click power",
         increase_click_power_wrapper,
         double_img
     )
@@ -76,8 +75,8 @@ def get_upgrades():
     enable_workers = Upgrade(
         15000,
         "Job Listings",
-        ["Cost: " + str(15000), "Allows hiring of workers", "A small flier in the town square",
-         "ought to attract attention"],
+        "Cost: " + str(15000) +
+        "\nAllows hiring of workers\nA small flier in the town square ought to attract attention",
         enable_workers_wrapper,
         jobs_img
     )
@@ -85,8 +84,8 @@ def get_upgrades():
     baskets = Upgrade(
         10000,
         "Berry Baskets",
-        ["Cost: " + str(10000), "Double Gathering XP Rate", "\"Storage innovations",
-         "mean workers can hold more", "for longer\""],
+        "Cost: " + str(10000) +
+        "\nDouble Gathering XP Rate\n\"Storage innovations mean workers can hold more for longer\"",
         double_gather_xp_wrapper,
         basket_img
     )
@@ -94,8 +93,8 @@ def get_upgrades():
     inventory = Upgrade(
         5000,
         "Personal Chest",
-        ["Cost: " + str(5000), "Unlock Inventory", "\"Now you can collect all",
-         "those priceless items you've been", "throwing away!\""],
+        "Cost: " + str(5000) +
+        "\nUnlock Inventory\n\"Now you can collect all those priceless items you've been throwing away!\"",
         inv_Wrapper,
         chest_upg_img
     )

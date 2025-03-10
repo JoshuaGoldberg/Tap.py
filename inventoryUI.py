@@ -1,8 +1,9 @@
+import text_wrapper
 from game import *
 from uiElement import *
 from button import Button
 from popup import *
-
+from text_wrapper import *
 
 class InventoryUI:
     def __init__(self, x, y, game):
@@ -56,5 +57,8 @@ class InventoryUI:
             item_icon.draw(surface, layer)
             item_name = font.render(self.game.selected_item.name, True, (255, 255, 255))
             surface.blit(item_name, (self.offset[0] + 470, self.offset[1]))
+            text = text_wrapper.render_text_list(
+                text_wrapper.wrap_text(self.game.selected_item.description, font, 280), font)
+            surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
         exitButton.draw(surface, layer)

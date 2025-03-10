@@ -30,10 +30,13 @@ class Game:
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         strange_rock_img = pygame.image.load('assets/strange_rock.png').convert_alpha()
 
-        BlueBerry = Item(blue_item_img, "Blue Berry", "A blue berry", lambda: None, lambda: None, self)
-        StrangeRock = Item(strange_rock_img, "Strange Rock", "Should it look like this?",
+        BlueBerry = Item(blue_item_img, "Blue Berry",
+                         "A blue berry. Probably safe to eat? It's your choice really.",
+                         lambda: None, lambda: None, self)
+        StrangeRock = Item(strange_rock_img, "Strange Rock",
+                           "Should it look like this? It really shouldn't look like this.",
                            lambda: None, lambda: None, self)
-        BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry", lambda: None, lambda: None, self)
+        BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.", lambda: None, lambda: None, self)
 
         self.accessories_inventory = [BlueBerry, StrangeRock, BlueBerry2]
         self.item_inventory = []
