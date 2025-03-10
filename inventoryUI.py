@@ -22,7 +22,7 @@ class InventoryUI:
         font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 32)
         font2 = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 48)
         tab_text = font2.render(self.game.inventory_tab, True, (0, 0, 0))
-        surface.blit(tab_text, (self.offset[0] - 785, self.offset[1] - 350))
+        surface.blit(tab_text, (self.offset[0] - 785, self.offset[1] - 355))
         x_img = pygame.image.load('assets/x.png').convert_alpha()
         exitButton = Button(self.offset[0] + 720, self.offset[1] - 415, x_img, 2.0,
                             lambda: self.game.exit_layer(), None, 1)
