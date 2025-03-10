@@ -37,7 +37,8 @@ class Game:
         StrangeRock = Item(strange_rock_img, "Strange Rock",
                            "Should it look like this? It really shouldn't look like this.",
                            lambda: None, lambda: None, self)
-        BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.", lambda: None, lambda: None, self)
+        BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.",
+                          lambda: None, lambda: None, self)
 
         self.accessories_inventory = [BlueBerry, StrangeRock, BlueBerry2]
         self.item_inventory = []
@@ -114,8 +115,20 @@ class Game:
             self.curr_id += 1
 
     def sell_worker(self, worker):
+
+        index = 0
+        for worker2 in self.workers:
+            if worker2 == worker:
+                break
+            else:
+                index += 1
+
         self.workers.remove(worker)
-        self.selectedWorker = None
+
+        if len(self.workers) >= index + 1:
+            self.selectedWorker = self.workers[index]
+        else:
+            self.selectedWorker = None
 
     def process_upgrade(self, upgrade):
         if self.value >= upgrade.cost:
