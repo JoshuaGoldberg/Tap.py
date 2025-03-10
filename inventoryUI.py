@@ -19,7 +19,9 @@ class InventoryUI:
         offset_y = 0
 
         self.inventoryBase.draw(surface)
-        font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 32)
+        font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 24)
+        sub_font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 20)
+
         font2 = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 48)
         tab_text = font2.render(self.game.inventory_tab, True, (0, 0, 0))
         surface.blit(tab_text, (self.offset[0] - 785, self.offset[1] - 355))
@@ -60,7 +62,7 @@ class InventoryUI:
             item_name = font.render(self.game.selected_item.name, True, (255, 255, 255))
             surface.blit(item_name, (self.offset[0] + 470, self.offset[1] - 15))
             text = text_wrapper.render_text_list(
-                text_wrapper.wrap_text(self.game.selected_item.description, font, 275), font)
+                text_wrapper.wrap_text(self.game.selected_item.description, sub_font, 275), sub_font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
         exitButton.draw(surface, layer)
