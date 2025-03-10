@@ -28,14 +28,21 @@ class Game:
         self.layer = 0
         self.layers = []
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
+        strange_rock_img = pygame.image.load('assets/strange_rock.png').convert_alpha()
+
         BlueBerry = Item(blue_item_img, "Blue Berry", "A blue berry", lambda: None, lambda: None, self)
-        self.accessories_inventory = []
+        StrangeRock = Item(strange_rock_img, "Strange Rock", "Should it look like this?",
+                           lambda: None, lambda: None, self)
+        BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry", lambda: None, lambda: None, self)
+
+        self.accessories_inventory = [BlueBerry, StrangeRock, BlueBerry2]
         self.item_inventory = []
         self.consumable_inventory = [BlueBerry]
         self.INVENTORY_LAYER = 1
         self.inventory_tab = "Accessories"
         self.inventory_unlocked = False
         self.max_workers = 10
+        self.selected_item = None
 
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
@@ -72,10 +79,14 @@ class Game:
             self.layers.pop(0)
 
     def exit_layer(self):
-        self.layers.pop(0)
+        if len(self.layers) > 0:
+            self.layers.pop(0)
 
     def unlock_inventory(self):
         self.inventory_unlocked = True
+
+    def set_selected_item(self, item):
+        self.selected_item = item
 
     def add_worker(self):
         cost = int(100 * (1.1 ** len(self.workers)))

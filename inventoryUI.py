@@ -10,6 +10,7 @@ class InventoryUI:
         self.game = game
         inventory_base_img = pygame.image.load('assets/inventory.png').convert_alpha()
         self.inventoryBase = UIElement(x, y, inventory_base_img, 8.15)
+        self.item_border_img = pygame.image.load('assets/item_border.png').convert_alpha()
 
     def draw(self, surface, layer):
         offset_x = 0
@@ -34,7 +35,12 @@ class InventoryUI:
         item_in_row = 0
         for item in curr_inventory:
             itemButton = Button(302 + offset_x, 340 + offset_y, item.image, 6.0,
-                                lambda: None, None, 1)
+                                lambda: self.game.set_selected_item(item), None, 1)
+
+            if self.game.selected_item == item:
+                border = UIElement(302 + offset_x, 340 + offset_y, self.item_border_img, 9)
+                border.draw(surface)
+
             itemButton.draw(surface, layer)
             item_in_row += 1
             offset_x += 146.5
@@ -44,5 +50,11 @@ class InventoryUI:
                 item_in_row = 0
                 offset_y += 146.5
 
+        if self.game.selected_item is not None:
+            item_icon = Button(1620, 360, self.game.selected_item.image, 9.0,
+                               lambda: None, None, 1)
+            item_icon.draw(surface, layer)
+            item_name = font.render(self.game.selected_item.name, True, (255, 255, 255))
+            surface.blit(item_name, (self.offset[0] + 470, self.offset[1]))
 
         exitButton.draw(surface, layer)
