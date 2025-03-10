@@ -10,6 +10,7 @@ class WorkerMenuUI:
         self.game = game
         worker_background_img = pygame.image.load('assets/worker_base.png').convert_alpha()
         self.workerBase = UIElement(0 + x, 0 + y, worker_background_img, 8.0)
+        self.font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 20)
 
     def draw(self, surface, layer):
 
@@ -17,6 +18,10 @@ class WorkerMenuUI:
         offset_y = 0
 
         self.workerBase.draw(surface)
+        capacity_text = self.font.render("Capacity: " + str(len(self.game.workers)) + "/" + str(self.game.max_workers),
+                                         True, (255, 255, 255))
+
+        surface.blit(capacity_text, (self.offset[0] - 190, self.offset[1] - 360))
 
         num = 1
         base = (self.game.worker_page - 1) * 45
