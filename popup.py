@@ -4,11 +4,11 @@ import text_wrapper
 
 
 def display_popup(text, blurb):
-    font_popup = pygame.font.SysFont(None, 25)
+    font_popup = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 16)
     BUTTON_TEXT_COLOR = (0, 0, 0)
     blurb_text = text_wrapper.wrap_text(blurb, font_popup, 280)
 
-    popup_height = 50 + (20 * len(blurb_text))
+    popup_height = 50 + (25 * len(blurb_text))
     text2 = text_wrapper.render_text_list(blurb_text, font_popup, (0, 0, 0))
 
     popup_window = pygame.Surface((300, popup_height))

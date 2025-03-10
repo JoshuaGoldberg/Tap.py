@@ -39,7 +39,7 @@ def get_upgrades():
     base_click_double_1 = Upgrade(
         150,
         "Iron Grip",
-        "Cost: " + str(15) + "\nDoubles value per click.\nIt turns out the secret to success is all in the handwork.",
+        "Cost: " + str(150) + "\nDoubles value per click.\nIt turns out the secret to success is all in the handwork.",
         double_base_clicks_wrapper,
         iron_grip_img
     )

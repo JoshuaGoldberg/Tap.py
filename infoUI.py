@@ -12,7 +12,7 @@ class InfoUI:
 
     def draw(self, surface, layer):
         self.upgradeBase.draw(surface)
-        font = pygame.font.SysFont(None, 48)
+        font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 32)
         if self.game.selectedWorker is not None:
             worker_image = Button(self.offset[0] + 148, self.offset[1] - 430, self.game.selectedWorker.image, 2.0,
                                   lambda: None, None, 0)

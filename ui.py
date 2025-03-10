@@ -13,7 +13,7 @@ class UI:
         self.screen = screen
         self.game = game
 
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 32)
         self.font_small = pygame.font.SysFont(None, 32)
         self.font_popup = pygame.font.SysFont(None, 25)
         self.cursor_img = pygame.image.load('assets/cursor.png').convert_alpha()
@@ -67,7 +67,7 @@ class UI:
 
         rounded_value = str(int(self.game.value))
         value_text = self.font.render(f"Value: {rounded_value}", True, (255, 255, 255))
-        self.screen.blit(value_text, (25, 25))
+        self.screen.blit(value_text, (25, 5))
 
         if self.game.total_value >= 50:
             upgradeScreen = UpgradeUI(300, 250, self.game)
