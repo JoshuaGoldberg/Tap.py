@@ -58,7 +58,7 @@ class InventoryUI:
             item_name = font.render(self.game.selected_item.name, True, (255, 255, 255))
             surface.blit(item_name, (self.offset[0] + 470, self.offset[1]))
             text = text_wrapper.render_text_list(
-                text_wrapper.wrap_text(self.game.selected_item.description, font, 280), font)
+                text_wrapper.wrap_text(self.game.selected_item.description, font, 275), font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
         exitButton.draw(surface, layer)
