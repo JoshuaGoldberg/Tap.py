@@ -3,6 +3,7 @@ from workerMenuUI import *
 from button import *
 from upgradeUI import *
 from infoUI import *
+from inventoryUI import *
 
 
 class UI:
@@ -23,13 +24,17 @@ class UI:
 
         click_button_img = pygame.image.load('assets/click_me.png').convert_alpha()
         worker_button_img = pygame.image.load('assets/buy_worker.png').convert_alpha()
+        inventory_button_img = pygame.image.load('assets/inventory_button.png').convert_alpha()
 
         self.click_button = Button(100, 120, click_button_img, 5.0,
                                    lambda: self.game.update_clicks(self.game.base_click * self.game.click_power), None,
-                                   0)
+                                   -1)
 
         self.worker_button = Button(100, 220, worker_button_img, 2.5,
                                     lambda: self.game.add_worker(), None, 0)
+
+        self.inventory_button = Button(70, 1019, inventory_button_img, 2.5,
+                                       lambda: self.game.access_inventory(), None, -1)
 
         self.worker_menu_next_page = pygame.Rect(1800, 1000, 50, 50)
         self.worker_menu_prev_page = pygame.Rect(1550, 1000, 50, 50)
@@ -54,6 +59,9 @@ class UI:
 
         self.click_button.draw(self.screen, self.game.layer)
 
+        if self.game.inventory_unlocked:
+            self.inventory_button.draw(self.screen, self.game.layer)
+
         rounded_value = str(int(self.game.value))
         value_text = self.font.render(f"Value: {rounded_value}", True, (255, 255, 255))
         self.screen.blit(value_text, (25, 25))
@@ -68,6 +76,14 @@ class UI:
             workerScreen.draw(self.screen, self.game.layer)
             infoScreen = InfoUI(1575, 250 + 335, self.game)
             infoScreen.draw(self.screen, self.game.layer)
+
+        # layer handler
+        for layer in self.game.layers:
+
+            # INVENTORY MENU
+            if layer == 1:
+                inventoryScreen = InventoryUI(1019, 560, self.game)
+                inventoryScreen.draw(self.screen, self.game.layer)
 
         cursor = UIElement(mouse_pos[0] + 32, mouse_pos[1] + 32, self.cursor_img, 2.0)
         cursor.draw(self.screen)

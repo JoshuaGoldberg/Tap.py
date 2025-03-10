@@ -15,7 +15,7 @@ class InfoUI:
         font = pygame.font.SysFont(None, 48)
         if self.game.selectedWorker is not None:
             worker_image = Button(self.offset[0] + 148, self.offset[1] - 430, self.game.selectedWorker.image, 2.0,
-                                  lambda: None, None, layer)
+                                  lambda: None, None, 0)
             worker_image.draw(surface, layer)
             name_text = font.render(
                 "Name: " + self.game.selectedWorker.firstname + " " + self.game.selectedWorker.lastname, True,
@@ -25,15 +25,15 @@ class InfoUI:
             surface.blit(line_text, (self.offset[0] - 230, self.offset[1] - 280))
             gather_img = pygame.image.load('assets/gathering.png').convert_alpha()
             gatheringButton = Button(self.offset[0] - 200, self.offset[1] - 200, gather_img, 2.0,
-                                     lambda: self.game.set_worker_status("Gathering"), None, layer)
+                                     lambda: self.game.set_worker_status("Gathering"), None, 0)
             mining_img = pygame.image.load('assets/mining.png').convert_alpha()
             miningButton = Button(self.offset[0] - 125, self.offset[1] - 200, mining_img, 2.0,
-                                  lambda: self.game.set_worker_status("Mining"), None, layer)
+                                  lambda: self.game.set_worker_status("Mining"), None, 0)
             gatheringButton.draw(surface, layer)
             miningButton.draw(surface, layer)
             retire_img = pygame.image.load('assets/retire.png').convert_alpha()
             retireButton = Button(self.offset[0] + 160, self.offset[1] + 400, retire_img, 2.0,
-                                  lambda: self.game.sell_worker(self.game.selectedWorker), None, layer)
+                                  lambda: self.game.sell_worker(self.game.selectedWorker), None, 0)
             retireButton.draw(surface, layer)
             if self.game.selectedWorker is not None:
                 worker_xp, work_level = self.game.selectedWorker.get_xp_and_level()

@@ -23,7 +23,7 @@ class Button:
 
         if self.rect.collidepoint(pos):
             surface.blit(self.altImage, self.alt_rect)
-            if pygame.mouse.get_pressed()[0] == 1 and not self.clicked and currLayer == self.layer and Button.pressed is False:
+            if pygame.mouse.get_pressed()[0] == 1 and not self.clicked and (currLayer == self.layer or self.layer == -1) and Button.pressed is False:
                 self.clicked = True
                 Button.pressed = True
                 self.action()

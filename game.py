@@ -5,6 +5,7 @@ import random
 
 
 class Game:
+
     def __init__(self, width, height, fps):
         self.fps = fps
         self.width = width
@@ -25,6 +26,12 @@ class Game:
         self.renown = 0
         self.layer = 0
         self.layers = []
+        self.accessories_inventory = []
+        self.item_inventory = []
+        self.consumable_inventory = []
+        self.INVENTORY_LAYER = 1
+        self.inventory_tab = "accessories"
+        self.inventory_unlocked = False
 
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
@@ -46,6 +53,18 @@ class Game:
 
     def enable_workers(self):
         self.workers_enabled = True
+
+    def access_inventory(self):
+        if self.layer == 0:
+            self.layers.insert(0, self.INVENTORY_LAYER)
+        elif self.layer == 1:
+            self.layers.pop(0)
+
+    def exit_layer(self):
+        self.layers.pop(0)
+
+    def unlock_inventory(self):
+        self.inventory_unlocked = True
 
     def add_worker(self):
         cost = int(100 * (1.1 ** len(self.workers)))
@@ -141,5 +160,10 @@ class Game:
 
             if self.total_value >= 7500 and self.workers_enabled is True:
                 if upgrade.name == "Berry Baskets":
+                    self.future_upgrades.remove(upgrade)
+                    self.upgrades.append(upgrade)
+
+            if self.value >= 2500 and self.workers_enabled is True:
+                if upgrade.name == "Personal Chest":
                     self.future_upgrades.remove(upgrade)
                     self.upgrades.append(upgrade)

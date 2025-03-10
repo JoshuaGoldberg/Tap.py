@@ -19,6 +19,10 @@ def double_gather_xp_wrapper(game):
     game.double_gathering_xp()
 
 
+def inv_Wrapper(game):
+    game.unlock_inventory()
+
+
 def get_upgrades():
     iron_grip_img = pygame.image.load('assets/iron_upgrade.png').convert_alpha()
     magic_stone_img = pygame.image.load('assets/magic_stone.png').convert_alpha()
@@ -27,6 +31,7 @@ def get_upgrades():
     double_img = pygame.image.load('assets/double_click.png').convert_alpha()
     jobs_img = pygame.image.load('assets/jobs.png').convert_alpha()
     basket_img = pygame.image.load('assets/basket.png').convert_alpha()
+    chest_upg_img = pygame.image.load('assets/chest_upg.png').convert_alpha()
 
     future_upgrades = []
     bought_upgrades = []
@@ -86,8 +91,18 @@ def get_upgrades():
         basket_img
     )
 
+    inventory = Upgrade(
+        5000,
+        "Personal Chest",
+        ["Cost: " + str(5000), "Unlock Inventory", "\"Now you can collect all",
+         "those priceless items you've been", "throwing away!\""],
+        inv_Wrapper,
+        chest_upg_img
+    )
+
     future_upgrades.extend([
         base_click_double_1, base_click_double_2, flat_click_power_1,
-        flat_click_power_2, flat_click_power_3, enable_workers, baskets
+        flat_click_power_2, flat_click_power_3, enable_workers, baskets,
+        inventory
     ])
     return future_upgrades, bought_upgrades

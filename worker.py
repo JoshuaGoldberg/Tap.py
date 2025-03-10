@@ -41,7 +41,7 @@ class Worker:
 
     def calculate_val(self):
         if self.current_activity == "Gathering":
-            self.gatheringXP += (100000 * self.game.gatheringXPBoost) / self.fps
+            self.gatheringXP += (1 * self.game.gatheringXPBoost) / self.fps
             if self.gatheringXP >= self.levels[self.gatheringLevel]:
                 self.gatheringXP = 0
                 self.gatheringLevel += 1
