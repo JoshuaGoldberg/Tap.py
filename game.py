@@ -2,6 +2,7 @@ import pygame
 from worker import Worker
 from upgradeDefinitions import get_upgrades
 import random
+from item import Item
 
 
 class Game:
@@ -26,15 +27,25 @@ class Game:
         self.renown = 0
         self.layer = 0
         self.layers = []
+        blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
+        BlueBerry = Item(blue_item_img, "Blue Berry", "A blue berry", lambda: None, lambda: None, self)
         self.accessories_inventory = []
         self.item_inventory = []
-        self.consumable_inventory = []
+        self.consumable_inventory = [BlueBerry]
         self.INVENTORY_LAYER = 1
-        self.inventory_tab = "accessories"
+        self.inventory_tab = "Accessories"
         self.inventory_unlocked = False
+        self.max_workers = 10
 
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
+
+    def get_total_levels(self, activity):
+        total = 0
+        for worker in self.workers:
+            if activity == "Gathering":
+                total += worker.gatheringLevel
+        return total
 
     def update_clicks(self, amount):
         self.value += amount
@@ -80,7 +91,7 @@ class Game:
         elif random_face == 4:
             worker_face_string = 'assets/worker_green.png'
 
-        if self.value >= cost:
+        if self.value >= cost and len(self.workers) < self.max_workers:
             self.value -= cost
             worker_img = pygame.image.load(worker_face_string).convert_alpha()
             worker = Worker(self.curr_id, worker_img, self, self.fps)
@@ -158,7 +169,7 @@ class Game:
                     self.future_upgrades.remove(upgrade)
                     self.upgrades.append(upgrade)
 
-            if self.total_value >= 7500 and self.workers_enabled is True:
+            if self.total_value >= 7500 and self.workers_enabled is True and self.get_total_levels("Gathering") >= 5:
                 if upgrade.name == "Berry Baskets":
                     self.future_upgrades.remove(upgrade)
                     self.upgrades.append(upgrade)
