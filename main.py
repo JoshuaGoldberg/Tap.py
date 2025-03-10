@@ -8,7 +8,7 @@ def main():
     pygame.init()
     WIDTH, HEIGHT = 1920, 1080
     SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Clicker")
+    pygame.display.set_caption("Yet Another Clicker Game")
 
     game = Game(WIDTH, HEIGHT, FPS)
     ui = UI(WIDTH, HEIGHT, SCREEN, game)
