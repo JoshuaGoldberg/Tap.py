@@ -16,16 +16,28 @@ def main():
     clock = pygame.time.Clock()
     running = True
     pygame.mouse.set_visible(False)
+    last_update_time_ui = pygame.time.get_ticks()
+    last_update_time_logic = pygame.time.get_ticks()
 
+    update_interval_ui = 7
+    update_interval_logic = 100
     while running:
+
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             ui.handle_event(event)
 
-        game.update()
-        ui.draw()
+        current_time = pygame.time.get_ticks()
+        if current_time - last_update_time_logic >= update_interval_logic:
+            game.update()
+            last_update_time_logic = current_time
+
+        if current_time - last_update_time_ui >= update_interval_ui:
+            last_update_time_ui = current_time
+            ui.draw()
+
         pygame.display.flip()
 
     pygame.quit()

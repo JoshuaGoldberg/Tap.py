@@ -46,7 +46,7 @@ class Game:
 
         self.accessories_inventory = []
         self.item_inventory = [StrangeRock]
-        self.consumable_inventory = [BlueBerry, BlueBerry2]
+        self.consumable_inventory = []
         self.INVENTORY_LAYER = 1
         self.inventory_tab = "Accessories"
         self.inventory_unlocked = False
@@ -103,6 +103,7 @@ class Game:
 
     def access_inventory(self):
         if self.layer == 0:
+            self.inventory_page = 1
             self.layers.insert(0, self.INVENTORY_LAYER)
         elif self.layer == 1:
             self.layers.pop(0)
@@ -182,7 +183,7 @@ class Game:
             self.layer = 0
 
         for worker in self.workers:
-            self.value += worker.calculate_val() / self.fps
+            self.value += worker.calculate_val() / 10
 
         self.check_upgrades()
 

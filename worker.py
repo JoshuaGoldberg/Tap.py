@@ -1,5 +1,5 @@
 import random
-
+from item import *
 
 class Worker:
     def __init__(self, worker_id, image, game, fps):
@@ -40,14 +40,22 @@ class Worker:
         self.fps = fps
 
     def calculate_val(self):
+        random_gen = random.randint(0, 40)
         if self.current_activity == "Gathering":
-            self.gatheringXP += (1 * self.game.gatheringXPBoost) / self.fps
+            self.gatheringXP += (1 * self.game.gatheringXPBoost) / 10
             if self.gatheringXP >= self.levels[self.gatheringLevel]:
                 self.gatheringXP = 0
                 self.gatheringLevel += 1
+            if random_gen == 2 and self.game.inventory_unlocked is True:
+                blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
+                BlueBerry = Item(blue_item_img, "Blue Berry",
+                                 "A blue berry. "
+                                 "Note: not a red berry, although it's easy to get confused",
+                                 lambda: None, lambda: None, self)
+                self.game.consumable_inventory.append(BlueBerry)
             return (self.gatheringLevel + 1) * self.gatheringBase
         elif self.current_activity == "Mining":
-            self.miningXP += 1 / self.fps
+            self.miningXP += 1 / 10
             if self.miningXP >= self.levels[self.miningLevel]:
                 self.miningXP = 0
                 self.miningLevel += 1
