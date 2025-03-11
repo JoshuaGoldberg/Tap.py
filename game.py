@@ -27,6 +27,7 @@ class Game:
         self.renown = 0
         self.layer = 0
         self.layers = []
+        self.inventory_page = 1
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         strange_rock_img = pygame.image.load('assets/strange_rock.png').convert_alpha()
 
@@ -43,9 +44,9 @@ class Game:
         BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.",
                           lambda: None, lambda: None, self)
 
-        self.accessories_inventory = [BlueBerry, StrangeRock, BlueBerry2]
-        self.item_inventory = []
-        self.consumable_inventory = [BlueBerry]
+        self.accessories_inventory = []
+        self.item_inventory = [StrangeRock]
+        self.consumable_inventory = [BlueBerry, BlueBerry2]
         self.INVENTORY_LAYER = 1
         self.inventory_tab = "Accessories"
         self.inventory_unlocked = False
@@ -54,6 +55,26 @@ class Game:
 
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
+
+    def inv_back(self):
+        if self.inventory_page > 1:
+            self.inventory_page -= 1
+
+    def inv_forward(self):
+        curr_tab = "Accessories"
+        if self.inventory_tab == "Accessories":
+            curr_tab = self.accessories_inventory
+        elif self.inventory_tab == "Items":
+            curr_tab = self.item_inventory
+        elif self.inventory_tab == "Consumables":
+            curr_tab = self.consumable_inventory
+
+        if len(curr_tab) > self.inventory_page * 40:
+            self.inventory_page += 1
+
+    def set_inventory_tab(self, tab_name):
+        self.inventory_tab = tab_name
+        self.inventory_page = 1
 
     def get_total_levels(self, activity):
         total = 0
