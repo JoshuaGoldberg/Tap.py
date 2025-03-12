@@ -28,6 +28,7 @@ class Game:
         self.layer = 0
         self.layers = []
         self.inventory_page = 1
+        self.new_item = False
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         strange_rock_img = pygame.image.load('assets/strange_rock.png').convert_alpha()
 
@@ -103,6 +104,7 @@ class Game:
 
     def access_inventory(self):
         if self.layer == 0:
+            self.new_item = False
             self.inventory_page = 1
             self.layers.insert(0, self.INVENTORY_LAYER)
         elif self.layer == 1:

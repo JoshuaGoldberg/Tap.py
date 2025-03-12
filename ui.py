@@ -18,6 +18,8 @@ class UI:
         self.font_popup = pygame.font.SysFont(None, 25)
         self.cursor_img = pygame.image.load('assets/cursor.png').convert_alpha()
         self.cursor_img2 = pygame.image.load('assets/cursor_2.png').convert_alpha()
+        alert_img = pygame.image.load('assets/alert.png').convert_alpha()
+        self.alert = UIElement(107.5, 985, alert_img, 4)
 
         self.button_width = 150
         self.button_height = 60
@@ -64,6 +66,8 @@ class UI:
 
         if self.game.inventory_unlocked:
             self.inventory_button.draw(self.screen, self.game.layer)
+            if self.game.new_item:
+                self.alert.draw(self.screen)
 
         rounded_value = str(int(self.game.value))
         value_text = self.font.render(f"Value: {rounded_value}", True, (255, 255, 255))
