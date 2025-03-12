@@ -40,7 +40,7 @@ class Worker:
         self.fps = fps
 
     def calculate_val(self):
-        random_gen = random.randint(0, 40)
+        random_gen = random.randint(0, 10000)
         if self.current_activity == "Gathering":
             self.gatheringXP += (1 * self.game.gatheringXPBoost) / 10
             if self.gatheringXP >= self.levels[self.gatheringLevel]:
