@@ -46,8 +46,8 @@ class Game:
                           lambda: None, lambda: None, self)
 
         self.accessories_inventory = []
-        self.item_inventory = [StrangeRock]
-        self.consumable_inventory = []
+        self.item_inventory = {StrangeRock: 1}
+        self.consumable_inventory = {}
         self.INVENTORY_LAYER = 1
         self.inventory_tab = "Accessories"
         self.inventory_unlocked = False
@@ -56,6 +56,20 @@ class Game:
 
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
+
+    def add_item(self, item, tab):
+        if tab == "Accessories":
+            self.accessories_inventory.append(item)
+        elif tab == "Items":
+            if item in self.item_inventory:
+                self.item_inventory[item] += 1
+            else:
+                self.item_inventory.update({item: 1})
+        elif tab == "Consumables":
+            if item in self.consumable_inventory:
+                self.consumable_inventory[item] += 1
+            else:
+                self.consumable_inventory.update({item: 1})
 
     def inv_back(self):
         if self.inventory_page > 1:

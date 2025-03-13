@@ -21,6 +21,7 @@ class InventoryUI:
         self.inventoryBase.draw(surface)
         font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 24)
         sub_font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 20)
+        small_font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 24)
 
         font2 = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 48)
         tab_text = font2.render(self.game.inventory_tab, True, (0, 0, 0))
@@ -70,6 +71,7 @@ class InventoryUI:
         item_in_row = 0
         item_num = (curr_page - 1) * 40
         curr_num = 0
+
         for item in curr_inventory:
             if item_num <= curr_num < item_num + 40:
                 itemButton = Button(302 + offset_x, 340 + offset_y, item.image, 6.0,
@@ -80,6 +82,11 @@ class InventoryUI:
                     border.draw(surface)
 
                 itemButton.draw(surface, layer)
+
+                if self.game.inventory_tab == "Consumables" or self.game.inventory_tab == "Items":
+                    number_of_item = small_font.render(str(curr_inventory[item]), True, (255, 255, 255))
+                    surface.blit(number_of_item, (250 + offset_x, 365 + offset_y))
+
                 item_in_row += 1
                 offset_x += 146.5
 

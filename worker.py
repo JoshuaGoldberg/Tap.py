@@ -40,7 +40,7 @@ class Worker:
         self.fps = fps
 
     def calculate_val(self):
-        random_gen = random.randint(0, 10000)
+        random_gen = random.randint(0, 40)
         if self.current_activity == "Gathering":
             self.gatheringXP += (1 * self.game.gatheringXPBoost) / 10
             if self.gatheringXP >= self.levels[self.gatheringLevel]:
@@ -53,7 +53,7 @@ class Worker:
                                  "A blue berry. "
                                  "Note: not a red berry, although it's easy to get confused",
                                  lambda: None, lambda: None, self)
-                self.game.consumable_inventory.append(BlueBerry)
+                self.game.add_item(BlueBerry, "Consumables")
             return (self.gatheringLevel + 1) * self.gatheringBase
         elif self.current_activity == "Mining":
             self.miningXP += 1 / 10
