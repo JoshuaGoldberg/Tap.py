@@ -84,8 +84,9 @@ class InventoryUI:
                 itemButton.draw(surface, layer)
 
                 if self.game.inventory_tab == "Consumables" or self.game.inventory_tab == "Items":
-                    number_of_item = small_font.render(str(curr_inventory[item]), True, (255, 255, 255))
-                    surface.blit(number_of_item, (250 + offset_x, 365 + offset_y))
+                    if curr_inventory[item] > 1:
+                        number_of_item = small_font.render(str(curr_inventory[item]), True, (255, 255, 255))
+                        surface.blit(number_of_item, (250 + offset_x, 365 + offset_y))
 
                 item_in_row += 1
                 offset_x += 146.5
