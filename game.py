@@ -59,16 +59,19 @@ class Game:
 
     def add_item(self, item, tab):
         if tab == "Accessories":
+            self.new_item = True
             self.accessories_inventory.append(item)
         elif tab == "Items":
             if item in self.item_inventory:
                 self.item_inventory[item] += 1
             else:
+                self.new_item = True
                 self.item_inventory.update({item: 1})
         elif tab == "Consumables":
             if item in self.consumable_inventory:
                 self.consumable_inventory[item] += 1
             else:
+                self.new_item = True
                 self.consumable_inventory.update({item: 1})
 
     def inv_back(self):

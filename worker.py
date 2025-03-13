@@ -47,7 +47,6 @@ class Worker:
                 self.gatheringXP = 0
                 self.gatheringLevel += 1
             if random_gen == 2 and self.game.inventory_unlocked is True:
-                self.game.new_item = True
                 blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
                 BlueBerry = Item(blue_item_img, "Blue Berry",
                                  "A blue berry. "
