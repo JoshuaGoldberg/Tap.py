@@ -38,9 +38,7 @@ class Game:
                          lambda: None, lambda: None, self)
         StrangeRock = Item(strange_rock_img, "Strange Rock",
                            "Should it look like this? It really shouldn't look like this."
-                           " Really I wouldn't trust a rock that looks like that something is most certainly off."
-                           " The last guy who touched a rock like that vanished without a trace, that's all I'll say."
-                           " But hey, it's your life, touch the rock, see what I care.",
+                           " Nothing good could ever happen by keeping this around, I'm sure of it.",
                            lambda: None, lambda: None, self)
         BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.",
                           lambda: None, lambda: None, self)
