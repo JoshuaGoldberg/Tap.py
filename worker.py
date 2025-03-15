@@ -1,6 +1,7 @@
 import random
 from item import *
 
+
 class Worker:
     def __init__(self, worker_id, image, game, fps):
 
@@ -51,7 +52,7 @@ class Worker:
                 BlueBerry = Item(blue_item_img, "Blue Berry",
                                  "A blue berry. "
                                  "Note: not a red berry, although it's easy to get confused",
-                                 lambda: None, lambda: None, self)
+                                 lambda: self.game.value_up(1000000000), lambda: None, self)
                 self.game.add_item(BlueBerry, "Consumables")
             return (self.gatheringLevel + 1) * self.gatheringBase
         elif self.current_activity == "Mining":

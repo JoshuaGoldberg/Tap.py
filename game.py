@@ -74,6 +74,33 @@ class Game:
                 self.new_item = True
                 self.consumable_inventory.update({item: 1})
 
+    def use_item(self):
+        item = self.selected_item
+        item.use_action()
+        self.trash_item()
+
+    def value_up(self, amt):
+        self.value += amt
+
+    def trash_item(self):
+        item = self.selected_item
+        tab = self.inventory_tab
+        if tab == "Accessories":
+            self.accessories_inventory[item] -= 1
+            if self.accessories_inventory[item] == 0:
+                del self.accessories_inventory[item]
+                self.selected_item = None
+        elif tab == "Items":
+            self.item_inventory[item] -= 1
+            if self.item_inventory[item] == 0:
+                del self.item_inventory[item]
+                self.selected_item = None
+        elif tab == "Consumables":
+            self.consumable_inventory[item] -= 1
+            if self.consumable_inventory[item] == 0:
+                del self.consumable_inventory[item]
+                self.selected_item = None
+
     def inv_back(self):
         if self.inventory_page > 1:
             self.inventory_page -= 1

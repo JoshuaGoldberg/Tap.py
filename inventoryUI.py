@@ -107,4 +107,15 @@ class InventoryUI:
                 text_wrapper.wrap_text(self.game.selected_item.description, sub_font, 275), sub_font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
+            if self.game.selected_item in self.game.consumable_inventory:
+                use_img = pygame.image.load('assets/use.png').convert_alpha()
+
+                use_button = Button(1380 + 146.5, 975, use_img, 3.0,
+                                    lambda: self.game.use_item(), None, 1)
+                use_button.draw(surface, layer)
+
+            trash_img = pygame.image.load('assets/trash.png').convert_alpha()
+            trash_button = Button(1570 + 146.5, 975, trash_img, 3.0,
+                                  lambda: self.game.trash_item(), None, 1)
+            trash_button.draw(surface, layer)
 
