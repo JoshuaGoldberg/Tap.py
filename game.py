@@ -13,7 +13,7 @@ class Game:
         self.height = height
         self.value = 0
         self.total_value = 0
-        self.base_click = 100000
+        self.base_click = 100000000
         self.click_power = 1
         self.base_click_progress = 0
         self.click_progress = 0

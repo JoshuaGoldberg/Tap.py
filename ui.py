@@ -8,6 +8,14 @@ from inventoryUI import *
 
 class UI:
     def __init__(self, width, height, screen, game):
+        self.number_titles = ["Million", "Billion", "Trillion",
+                              "Quadrillion", "Quintillion", "Sextillion",
+                              "Septillion", "Octillion", "Nonillion",
+                              "Decillion", "Undecillion", "Duodecillion",
+                              "Tredecillion", "Quattuordecillion",
+                              "Quindecillion", "Sexdecillion",
+                              "Septdecillion", "Octodecillion",
+                              "Novemdecillion", "Vigintillion"]
         self.width = width
         self.height = height
         self.screen = screen
@@ -54,6 +62,18 @@ class UI:
             if event.key == pygame.K_ESCAPE:
                 self.game.exit_layer()
 
+    def format_number(self, number):
+        if number > 999999:
+            return self.format_number_helper(number / 1000000, 0)
+        else:
+            return str(number)
+
+    def format_number_helper(self, number, acc):
+        if number >= 1000:
+            return self.format_number_helper(number / 1000, acc + 1)
+        else:
+            return str(round(number, 3)) + " " + self.number_titles[acc]
+
     def draw(self):
 
         mouse_pos = pygame.mouse.get_pos()
@@ -69,7 +89,7 @@ class UI:
             if self.game.new_item:
                 self.alert.draw(self.screen)
 
-        rounded_value = str(int(self.game.value))
+        rounded_value = self.format_number(int(self.game.value))
         value_text = self.font.render(f"Value: {rounded_value}", True, (255, 255, 255))
         self.screen.blit(value_text, (25, 5))
 
