@@ -39,7 +39,7 @@ class Worker:
         self.image = image
         self.game = game
         self.fps = fps
-        self.slot_count = 4
+        self.slot_count = 1
 
     def handle_equip(self, index):
         if self.game.select_for_equip is not None:

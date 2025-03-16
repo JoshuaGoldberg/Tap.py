@@ -48,14 +48,20 @@ class InfoUI:
                 slot_img = pygame.image.load('assets/worker_item_slot.png').convert_alpha()
                 slot_offset_x = 0
                 slot_num = 0
+                temp = []
                 for x in range(self.game.selectedWorker.slot_count):
                     worker_slot = Button(self.offset[0] - 180 + slot_offset_x, self.offset[1] + 290, slot_img, 6.0,
                                          lambda: self.game.selectedWorker.handle_equip(slot_num), None, 0)
                     worker_slot.draw(surface, layer)
-                    if self.game.selectedWorker.items[slot_num] is not None:
+                    select_item = self.game.selectedWorker.items[slot_num]
+                    if isinstance(select_item, Item):
                         slotted_item = Button(self.offset[0] - 180 + slot_offset_x, self.offset[1] + 290,
-                                              self.game.selectedWorker.items[slot_num].image, 5.0,
-                                              lambda: None, None, 0)
+                                              select_item.image, 5.0,
+                                              lambda: None, display_popup(select_item.name, select_item.description + "\n" + "Click to unequip."), 0)
+                        temp.append(slotted_item)
                         slotted_item.draw(surface, layer)
                     slot_offset_x += 120
                     slot_num += 1
+
+                for button in temp:
+                    button.handlePopup(surface, layer)
