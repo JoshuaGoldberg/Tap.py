@@ -5,13 +5,12 @@ class Item:
 
     pressed = False
 
-    def __init__(self, image, name, description, use_action, equip_action, game):
+    def __init__(self, image, name, description, use_action, equip_action):
         self.image = image
         self.name = name
         self.description = description
         self.use_action = use_action
         self.equip_action = equip_action
-        self.game = game
         self.equipped_by = None
 
     def __key(self):
@@ -24,3 +23,6 @@ class Item:
         if isinstance(other, Item):
             return self.__key() == other.__key()
         return NotImplemented
+
+    def boost_stat(self, value, category):
+        self.equipped_by.item_bonuses[category] *= value

@@ -26,10 +26,10 @@ class Worker:
         self.clickingLevel = 0
         self.gatheringXP = 0
         self.gatheringLevel = 0
-        self.gatheringBase = 1
+        self.working_bases = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        self.item_bonuses = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.miningXP = 0
         self.miningLevel = 0
-        self.miningBase = 0.1
         self.current_activity = "Gathering"
         self.itemLimit = 1
         self.items = [None, None, None, None, None]
@@ -67,7 +67,7 @@ class Worker:
                 BlueBerry = Item(blue_item_img, "Blue Berry",
                                  "A blue berry. "
                                  "Note: not a red berry, although it's easy to get confused",
-                                 lambda: self.game.value_up(1000000000), lambda: None, self)
+                                 lambda: self.game.value_up(1000000000), lambda: None)
                 self.game.add_item(BlueBerry, "Consumables")
 
     def update_xp(self):
@@ -83,10 +83,16 @@ class Worker:
                 self.miningLevel += 1
 
     def calculate_val(self):
+        for i in range(0, len(self.item_bonuses)):
+            self.item_bonuses[i] = 1
+        for item in self.items:
+            if isinstance(item, Item):
+                item.equip_action()
+
         if self.current_activity == "Gathering":
-            return (self.gatheringLevel + 1) * self.gatheringBase
+            return (self.gatheringLevel + 1) * self.working_bases[0] * self.item_bonuses[0]
         elif self.current_activity == "Mining":
-            return (self.miningLevel + 1) * self.miningBase
+            return (self.miningLevel + 1) * self.working_bases[1] * self.item_bonuses[1]
 
     def get_xp_and_level(self):
         if self.current_activity == "Gathering":

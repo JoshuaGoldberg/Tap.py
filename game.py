@@ -1,8 +1,10 @@
 import pygame
+
+import itemDefinitions
 from worker import Worker
 from upgradeDefinitions import get_upgrades
 import random
-from item import Item
+from itemDefinitions import *
 
 
 class Game:
@@ -35,15 +37,16 @@ class Game:
         BlueBerry = Item(blue_item_img, "Blue Berry",
                          "A blue berry. "
                          "Note: not a red berry, although it's easy to get confused",
-                         lambda: None, lambda: None, self)
+                         lambda: None, lambda: None)
         StrangeRock = Item(strange_rock_img, "Strange Rock",
                            "Should it look like this? It really shouldn't look like this."
                            " Nothing good could ever happen by keeping this around, I'm sure of it.",
-                           lambda: None, lambda: None, self)
+                           lambda: None, lambda: None)
         BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.",
-                          lambda: None, lambda: None, self)
+                          lambda: None, lambda: None)
 
-        self.accessories_inventory = [StrangeRock]
+        self.game_items = get_items()
+        self.accessories_inventory = [StrangeRock,  self.game_items[0]]
         self.item_inventory = {}
         self.consumable_inventory = {}
         self.INVENTORY_LAYER = 1
