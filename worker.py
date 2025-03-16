@@ -42,13 +42,13 @@ class Worker:
         self.slot_count = 4
 
     def handle_equip(self, index):
-        if self.game.selected_item is not None:
+        if self.game.select_for_equip is not None:
             if self.items[index] is not None:
                 self.items[index].equipped_by = None
                 self.items[index] = None
-            self.items[index] = self.game.selected_item
-            self.game.selected_item.equipped_by = self
-            self.game.selected_item = None
+            self.items[index] = self.game.select_for_equip
+            self.game.select_for_equip.equipped_by = self
+            self.game.select_for_equip = None
         else:
             if self.items[index] is not None:
                 self.items[index].equipped_by = None

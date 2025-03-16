@@ -117,6 +117,7 @@ class InventoryUI:
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
             if self.game.selected_item.equipped_by is None:
+
                 if self.game.selected_item in self.game.consumable_inventory:
                     use_img = pygame.image.load('assets/use.png').convert_alpha()
 
