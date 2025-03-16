@@ -35,6 +35,7 @@ class InfoUI:
             retireButton = Button(self.offset[0] + 160, self.offset[1] + 400, retire_img, 2.0,
                                   lambda: self.game.sell_worker(self.game.selectedWorker), None, 0)
             retireButton.draw(surface, layer)
+
             if self.game.selectedWorker is not None:
                 worker_xp, work_level = self.game.selectedWorker.get_xp_and_level()
                 rounded_xp = str(int(worker_xp[0]))
@@ -43,3 +44,18 @@ class InfoUI:
                 level_text = font.render("Level: " + level_str + "/50", True, (0, 0, 0))
                 surface.blit(xp_text, (self.offset[0] - 230, self.offset[1] - 150))
                 surface.blit(level_text, (self.offset[0] - 230, self.offset[1] - 110))
+
+                slot_img = pygame.image.load('assets/worker_item_slot.png').convert_alpha()
+                slot_offset_x = 0
+                slot_num = 0
+                for x in range(self.game.selectedWorker.slot_count):
+                    worker_slot = Button(self.offset[0] - 180 + slot_offset_x, self.offset[1] + 290, slot_img, 6.0,
+                                         lambda: self.game.selectedWorker.handle_equip(slot_num), None, 0)
+                    worker_slot.draw(surface, layer)
+                    if self.game.selectedWorker.items[slot_num] is not None:
+                        slotted_item = Button(self.offset[0] - 180 + slot_offset_x, self.offset[1] + 290,
+                                              self.game.selectedWorker.items[slot_num].image, 5.0,
+                                              lambda: None, None, 0)
+                        slotted_item.draw(surface, layer)
+                    slot_offset_x += 120
+                    slot_num += 1

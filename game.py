@@ -43,8 +43,8 @@ class Game:
         BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.",
                           lambda: None, lambda: None, self)
 
-        self.accessories_inventory = []
-        self.item_inventory = {StrangeRock: 1}
+        self.accessories_inventory = [StrangeRock]
+        self.item_inventory = {}
         self.consumable_inventory = {}
         self.INVENTORY_LAYER = 1
         self.inventory_tab = "Accessories"
@@ -54,6 +54,7 @@ class Game:
 
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
+        self.select_for_equip = None
 
     def add_item(self, item, tab):
         if tab == "Accessories":
@@ -72,6 +73,10 @@ class Game:
                 self.new_item = True
                 self.consumable_inventory.update({item: 1})
 
+    def equip_select(self, item):
+        self.select_for_equip = item
+        self.exit_layer()
+
     def use_item(self):
         item = self.selected_item
         item.use_action()
@@ -84,10 +89,8 @@ class Game:
         item = self.selected_item
         tab = self.inventory_tab
         if tab == "Accessories":
-            self.accessories_inventory[item] -= 1
-            if self.accessories_inventory[item] == 0:
-                del self.accessories_inventory[item]
-                self.selected_item = None
+            self.accessories_inventory.remove(item)
+            self.selected_item = None
         elif tab == "Items":
             self.item_inventory[item] -= 1
             if self.item_inventory[item] == 0:
@@ -191,7 +194,7 @@ class Game:
                 break
             else:
                 index += 1
-
+        worker.remove_items()
         self.workers.remove(worker)
 
         if len(self.workers) >= index + 1:
@@ -228,6 +231,8 @@ class Game:
 
         for worker in self.workers:
             self.value += worker.calculate_val() / 10
+            worker.update_xp()
+            worker.update_loot()
 
         self.check_upgrades()
 

@@ -12,6 +12,7 @@ class Item:
         self.use_action = use_action
         self.equip_action = equip_action
         self.game = game
+        self.equipped_by = None
 
     def __key(self):
         return self.name, self.description

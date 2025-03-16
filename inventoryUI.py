@@ -71,6 +71,7 @@ class InventoryUI:
         item_in_row = 0
         item_num = (curr_page - 1) * 40
         curr_num = 0
+        temp = []
 
         for item in curr_inventory:
             if item_num <= curr_num < item_num + 40:
@@ -83,10 +84,17 @@ class InventoryUI:
 
                 itemButton.draw(surface, layer)
 
-                if self.game.inventory_tab == "Consumables" or self.game.inventory_tab == "Items":
+                if curr_inventory == self.game.consumable_inventory or curr_inventory == self.game.item_inventory:
                     if curr_inventory[item] > 1:
                         number_of_item = small_font.render(str(curr_inventory[item]), True, (255, 255, 255))
                         surface.blit(number_of_item, (250 + offset_x, 365 + offset_y))
+
+                if item.equipped_by is not None:
+                    worker = item.equipped_by
+                    equipped_icon = Button(352 + offset_x, 290 + offset_y, item.equipped_by.image, 1.5,
+                                           lambda: None, display_popup("Equipped by:", worker.firstname + " " + worker.lastname), 1)
+                    equipped_icon.draw(surface, layer)
+                    temp.append(equipped_icon)
 
                 item_in_row += 1
                 offset_x += 146.5
@@ -95,6 +103,7 @@ class InventoryUI:
                     offset_x = 0
                     item_in_row = 0
                     offset_y += 146.5
+
             curr_num += 1
 
         if self.game.selected_item is not None:
@@ -107,15 +116,25 @@ class InventoryUI:
                 text_wrapper.wrap_text(self.game.selected_item.description, sub_font, 275), sub_font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
-            if self.game.selected_item in self.game.consumable_inventory:
-                use_img = pygame.image.load('assets/use.png').convert_alpha()
+            if self.game.selected_item.equipped_by is None:
+                if self.game.selected_item in self.game.consumable_inventory:
+                    use_img = pygame.image.load('assets/use.png').convert_alpha()
 
-                use_button = Button(1380 + 146.5, 975, use_img, 3.0,
-                                    lambda: self.game.use_item(), None, 1)
-                use_button.draw(surface, layer)
+                    use_button = Button(1380 + 146.5, 975, use_img, 3.0,
+                                        lambda: self.game.use_item(), None, 1)
+                    use_button.draw(surface, layer)
 
-            trash_img = pygame.image.load('assets/trash.png').convert_alpha()
-            trash_button = Button(1570 + 146.5, 975, trash_img, 3.0,
-                                  lambda: self.game.trash_item(), None, 1)
-            trash_button.draw(surface, layer)
+                if self.game.selected_item in self.game.accessories_inventory:
+                    equip_img = pygame.image.load('assets/equip.png').convert_alpha()
 
+                    equip_button = Button(1380 + 146.5, 975, equip_img, 3.0,
+                                          lambda: self.game.equip_select(self.game.selected_item), None, 1)
+                    equip_button.draw(surface, layer)
+
+                trash_img = pygame.image.load('assets/trash.png').convert_alpha()
+                trash_button = Button(1570 + 146.5, 975, trash_img, 3.0,
+                                      lambda: self.game.trash_item(), None, 1)
+                trash_button.draw(surface, layer)
+
+        for button in temp:
+            button.handlePopup(surface, layer)
