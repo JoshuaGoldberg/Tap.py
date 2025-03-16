@@ -92,7 +92,7 @@ class InventoryUI:
                 if item.equipped_by is not None:
                     worker = item.equipped_by
                     equipped_icon = Button(352 + offset_x, 290 + offset_y, item.equipped_by.image, 1.5,
-                                           lambda: None, display_popup("Equipped by:", worker.firstname + " " + worker.lastname), 1)
+                                           lambda: self.game.close_and_select(item.equipped_by), display_popup("Equipped by:", worker.firstname + " " + worker.lastname), 1)
                     equipped_icon.draw(surface, layer)
                     temp.append(equipped_icon)
 

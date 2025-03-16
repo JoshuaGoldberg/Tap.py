@@ -59,6 +59,10 @@ class Game:
         self.future_upgrades, self.bought_upgrades = get_upgrades()
         self.select_for_equip = None
 
+    def close_and_select(self, worker):
+        self.exit_layer()
+        self.select_worker(worker)
+
     def add_item(self, item, tab):
         if tab == "Accessories":
             self.new_item = True
