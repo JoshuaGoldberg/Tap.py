@@ -3,7 +3,7 @@ from item import *
 
 
 class Worker:
-    def __init__(self, worker_id, image, game, fps):
+    def __init__(self, worker_id, image, game, fps, item_list):
 
         first_names = ["Aether", "Agnes", "Edith", "Margery", "Odilia", "Ella", "Reina",
                        "Joachim", "Alistair", "Bennett", "Conrad", "Drake", "Josh", "Percival", "Warner",
@@ -18,6 +18,7 @@ class Worker:
 
         random_gen = random.randint(0, len(first_names) - 1)
         random_gen2 = random.randint(0, len(last_names) - 1)
+        self.item_list = item_list
 
         self.firstname = first_names[random_gen]
         self.lastname = last_names[random_gen2]
@@ -63,13 +64,19 @@ class Worker:
         random_gen = random.randint(0, 3)
         if self.current_activity == "Gathering":
             if random_gen == 2 and self.game.inventory_unlocked is True:
-                blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
-                BlueBerry = Item(blue_item_img, "Blue Berry",
-                                 "A blue berry. "
-                                 "Note: not a red berry, although it's easy to get confused",
-                                 "Consumables",
-                                 lambda: self.game.value_up(1000000000), lambda: None)
-                self.game.add_item(BlueBerry)
+                random_gen2 = random.randint(0, 3)
+                if random_gen2 == 2:
+                    blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
+                    BlueBerry = Item(blue_item_img, "Blue Berry",
+                                     "A blue berry. "
+                                     "Note: not a red berry, although it's easy to get confused",
+                                     "Consumables",
+                                     lambda: self.game.value_up(1000000000), lambda: None)
+                    item = BlueBerry
+                else:
+                    item = self.item_list["Twig"]
+
+                self.game.add_item(item)
 
     def update_xp(self):
         if self.current_activity == "Gathering":

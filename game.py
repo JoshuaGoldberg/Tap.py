@@ -49,7 +49,7 @@ class Game:
                           lambda: None, lambda: None)
 
         self.game_items = get_items()
-        self.accessories_inventory = [StrangeRock,  self.game_items[0]]
+        self.accessories_inventory = [StrangeRock,  self.game_items["Dev Shovel"]]
         self.item_inventory = {}
         self.consumable_inventory = {}
         self.INVENTORY_LAYER = 1
@@ -192,7 +192,7 @@ class Game:
         if self.value >= cost and len(self.workers) < self.max_workers:
             self.value -= cost
             worker_img = pygame.image.load(worker_face_string).convert_alpha()
-            worker = Worker(self.curr_id, worker_img, self, self.fps)
+            worker = Worker(self.curr_id, worker_img, self, self.fps, self.game_items)
             self.workers.append(worker)
             self.curr_id += 1
 
