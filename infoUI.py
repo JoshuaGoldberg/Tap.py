@@ -49,6 +49,8 @@ class InfoUI:
                 slot_offset_x = 0
                 slot_num = 0
                 temp = []
+
+                # item slot rendering
                 for x in range(self.game.selectedWorker.slot_count):
                     worker_slot = Button(self.offset[0] - 180 + slot_offset_x, self.offset[1] + 290, slot_img, 6.0,
                                          lambda: self.game.selectedWorker.handle_equip(slot_num), None, 0)
@@ -57,7 +59,8 @@ class InfoUI:
                     if isinstance(select_item, Item):
                         slotted_item = Button(self.offset[0] - 180 + slot_offset_x, self.offset[1] + 290,
                                               select_item.image, 5.0,
-                                              lambda: None, display_popup(select_item.name, select_item.description + "\n" + "Click to unequip."), 0)
+                                              lambda: None, display_popup(select_item.name, select_item.description +
+                                                                          "\n" + "Click to unequip."), 0)
                         temp.append(slotted_item)
                         slotted_item.draw(surface, layer)
                     slot_offset_x += 120
