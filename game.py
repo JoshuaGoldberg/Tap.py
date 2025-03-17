@@ -36,13 +36,16 @@ class Game:
 
         BlueBerry = Item(blue_item_img, "Blue Berry",
                          "A blue berry. "
-                         "Note: not a red berry, although it's easy to get confused",
+                         "Note: not a red berry, although it's easy to get confused", "Consumables",
                          lambda: None, lambda: None)
         StrangeRock = Item(strange_rock_img, "Strange Rock",
                            "Should it look like this? It really shouldn't look like this."
                            " Nothing good could ever happen by keeping this around, I'm sure of it.",
+                           "Items",
                            lambda: None, lambda: None)
-        BlueBerry2 = Item(blue_item_img, "Bluer Berry", "A bluer berry. Maybe don't trust this one. Bad vibes.",
+        BlueBerry2 = Item(blue_item_img, "Bluer Berry",
+                          "A bluer berry. Maybe don't trust this one. Bad vibes.",
+                          "Consumables",
                           lambda: None, lambda: None)
 
         self.game_items = get_items()
@@ -63,17 +66,17 @@ class Game:
         self.exit_layer()
         self.select_worker(worker)
 
-    def add_item(self, item, tab):
-        if tab == "Accessories":
+    def add_item(self, item):
+        if item.classification == "Accessories":
             self.new_item = True
             self.accessories_inventory.append(item)
-        elif tab == "Items":
+        elif item.classification == "Items":
             if item in self.item_inventory:
                 self.item_inventory[item] += 1
             else:
                 self.new_item = True
                 self.item_inventory.update({item: 1})
-        elif tab == "Consumables":
+        elif item.classification == "Consumables":
             if item in self.consumable_inventory:
                 self.consumable_inventory[item] += 1
             else:

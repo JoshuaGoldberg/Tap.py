@@ -5,7 +5,8 @@ class Item:
 
     pressed = False
 
-    def __init__(self, image, name, description, use_action, equip_action):
+    def __init__(self, image, name, description, classification, use_action, equip_action):
+        self.classification = classification
         self.image = image
         self.name = name
         self.description = description

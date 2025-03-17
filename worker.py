@@ -67,8 +67,9 @@ class Worker:
                 BlueBerry = Item(blue_item_img, "Blue Berry",
                                  "A blue berry. "
                                  "Note: not a red berry, although it's easy to get confused",
+                                 "Consumables",
                                  lambda: self.game.value_up(1000000000), lambda: None)
-                self.game.add_item(BlueBerry, "Consumables")
+                self.game.add_item(BlueBerry)
 
     def update_xp(self):
         if self.current_activity == "Gathering":
