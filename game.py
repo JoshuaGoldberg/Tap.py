@@ -48,8 +48,8 @@ class Game:
                           "Consumables",
                           lambda: None, lambda: None)
 
-        self.game_items = get_items()
-        self.accessories_inventory = [StrangeRock,  self.game_items["Dev Shovel"]]
+        self.game_items = ItemsManager(self)
+        self.accessories_inventory = [StrangeRock, self.game_items.item_list["Dev Shovel"]]
         self.item_inventory = {}
         self.consumable_inventory = {}
         self.INVENTORY_LAYER = 1
