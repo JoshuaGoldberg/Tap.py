@@ -2,7 +2,6 @@ from game import *
 
 
 class Button:
-
     pressed = False
 
     def __init__(self, x, y, image, scale, action, popup, layer):
@@ -17,15 +16,18 @@ class Button:
         self.clicked = False
         self.popup = popup
         self.layer = layer
+        self.click_sound = pygame.mixer.Sound('sounds/soft_click.wav')
 
     def draw(self, surface, currLayer):
         pos = pygame.mouse.get_pos()
 
         if self.rect.collidepoint(pos):
             surface.blit(self.altImage, self.alt_rect)
-            if pygame.mouse.get_pressed()[0] == 1 and not self.clicked and (currLayer == self.layer or self.layer == -1) and Button.pressed is False:
+            if pygame.mouse.get_pressed()[0] == 1 and not self.clicked and (
+                    currLayer == self.layer or self.layer == -1) and Button.pressed is False:
                 self.clicked = True
                 Button.pressed = True
+                self.click_sound.play()
                 self.action()
         else:
             surface.blit(self.image, self.rect)

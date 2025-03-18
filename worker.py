@@ -41,6 +41,7 @@ class Worker:
         self.game = game
         self.fps = fps
         self.slot_count = 1
+        self.equip_sound = pygame.mixer.Sound('sounds/equip.wav')
 
     def handle_equip(self, index):
         if self.game.select_for_equip is not None:
@@ -50,6 +51,7 @@ class Worker:
             self.items[index] = self.game.select_for_equip
             self.game.select_for_equip.equipped_by = self
             self.game.select_for_equip = None
+            self.equip_sound.play()
         else:
             if self.items[index] is not None:
                 self.items[index].equipped_by = None
