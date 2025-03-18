@@ -64,10 +64,14 @@ class Worker:
         random_gen = random.randint(0, 3)
         if self.current_activity == "Gathering":
             if random_gen == 2 and self.game.inventory_unlocked is True:
-                
                 pool = self.item_manager.gather_lp
                 item = pool[random.randint(0, len(pool) - 1)]
 
+                self.game.add_item(item)
+        elif self.current_activity == "Mining":
+            if random_gen == 2 and self.game.inventory_unlocked is True:
+                pool = self.item_manager.mining_lp
+                item = pool[random.randint(0, len(pool) - 1)]
                 self.game.add_item(item)
 
     def update_xp(self):
