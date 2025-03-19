@@ -86,7 +86,7 @@ class Game:
 
     def equip_select(self, item):
         self.select_for_equip = item
-        self.exit_layer()
+        self.exit_to_base()
 
     def use_item(self):
         item = self.selected_item
@@ -159,21 +159,28 @@ class Game:
         self.workers_enabled = True
 
     def access_inventory(self):
-        if self.layer == 0:
+        if self.layer != 1:
+            if self.INVENTORY_LAYER in self.layers:
+                self.layers.remove(self.INVENTORY_LAYER)
+
             self.new_item = False
             self.inventory_page = 1
             self.layers.insert(0, self.INVENTORY_LAYER)
         elif self.layer == 1:
             self.layers.pop(0)
-        print(self.layers)
 
     def access_shop(self):
+        if self.SHOP_LAYER in self.layers:
+            self.layers.remove(self.SHOP_LAYER)
+
         self.layers.insert(0, self.SHOP_LAYER)
-        print(self.layers)
 
     def exit_layer(self):
         if len(self.layers) > 0:
             self.layers.pop(0)
+
+    def exit_to_base(self):
+        self.layers.clear()
 
     def unlock_inventory(self):
         self.inventory_unlocked = True
