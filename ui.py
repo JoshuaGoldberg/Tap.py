@@ -4,6 +4,7 @@ from button import *
 from upgradeUI import *
 from infoUI import *
 from inventoryUI import *
+from shopUI import *
 
 
 class UI:
@@ -35,6 +36,7 @@ class UI:
         click_button_img = pygame.image.load('assets/click_me.png').convert_alpha()
         worker_button_img = pygame.image.load('assets/buy_worker.png').convert_alpha()
         inventory_button_img = pygame.image.load('assets/inventory_button.png').convert_alpha()
+        shop_button_img = pygame.image.load('assets/shop_button.png').convert_alpha()
 
         self.click_button = Button(100, 120, click_button_img, 5.0,
                                    lambda: self.game.update_clicks(self.game.base_click * self.game.click_power), None,
@@ -45,6 +47,9 @@ class UI:
 
         self.inventory_button = Button(70, 1019, inventory_button_img, 2.5,
                                        lambda: self.game.access_inventory(), None, -1)
+
+        self.shop_button = Button(100, 320, shop_button_img, 5.0,
+                                  lambda: self.game.access_shop(), None, -1)
 
         self.worker_menu_next_page = pygame.Rect(1800, 1000, 50, 50)
         self.worker_menu_prev_page = pygame.Rect(1550, 1000, 50, 50)
@@ -86,6 +91,8 @@ class UI:
 
         if self.game.inventory_unlocked:
             self.inventory_button.draw(self.screen, self.game.layer)
+            # TEMP
+            self.shop_button.draw(self.screen, self.game.layer)
             if self.game.new_item:
                 self.alert.draw(self.screen)
 
@@ -105,12 +112,15 @@ class UI:
             infoScreen.draw(self.screen, self.game.layer)
 
         # layer handler
-        for layer in self.game.layers:
 
-            # INVENTORY MENU
-            if layer == 1:
-                inventoryScreen = InventoryUI(1019, 560, self.game)
-                inventoryScreen.draw(self.screen, self.game.layer)
+        # INVENTORY MENU
+        if self.game.layer == 1:
+            inventoryScreen = InventoryUI(1019, 560, self.game)
+            inventoryScreen.draw(self.screen, self.game.layer)
+
+        if self.game.layer == 2:
+            shopScreen = ShopUI(1019, 560, self.game)
+            shopScreen.draw(self.screen, self.game.layer)
 
         cursor = UIElement(mouse_pos[0] + 32, mouse_pos[1] + 32, self.cursor_img, 2.0)
         cursor.draw(self.screen)

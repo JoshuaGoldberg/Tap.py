@@ -16,7 +16,7 @@ class Button:
         self.clicked = False
         self.popup = popup
         self.layer = layer
-        self.click_sound = pygame.mixer.Sound('sounds/soft_click.wav')
+        self.click_sound = pygame.mixer.Sound('sounds/temp_click.wav')
 
     def draw(self, surface, currLayer):
         pos = pygame.mouse.get_pos()

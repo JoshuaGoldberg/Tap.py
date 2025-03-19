@@ -53,6 +53,7 @@ class Game:
         self.item_inventory = {}
         self.consumable_inventory = {}
         self.INVENTORY_LAYER = 1
+        self.SHOP_LAYER = 2
         self.inventory_tab = "Accessories"
         self.inventory_unlocked = False
         self.max_workers = 10
@@ -164,6 +165,11 @@ class Game:
             self.layers.insert(0, self.INVENTORY_LAYER)
         elif self.layer == 1:
             self.layers.pop(0)
+        print(self.layers)
+
+    def access_shop(self):
+        self.layers.insert(0, self.SHOP_LAYER)
+        print(self.layers)
 
     def exit_layer(self):
         if len(self.layers) > 0:
