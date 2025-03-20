@@ -5,6 +5,8 @@ from worker import Worker
 from upgradeDefinitions import get_upgrades
 import random
 from itemDefinitions import *
+import time
+from datetime import datetime, timedelta
 
 
 class Game:
@@ -58,10 +60,35 @@ class Game:
         self.inventory_unlocked = False
         self.max_workers = 10
         self.selected_item = None
-
+        self.seals_inventory = []
+        self.seal_offsets = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+        self.seal_positions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
         self.select_for_equip = None
+        self.interval = 1
+        self.current_time = datetime.now()
+        self.next_event_time = (self.current_time + timedelta(minutes=self.interval)).replace(second=0, microsecond=0)
+        self.restock_shop()
+
+    def buy_seal(self, item, cost, position, seal_num):
+        if self.value >= cost:
+            self.add_item(item)
+            self.value -= cost
+            self.seal_positions.remove(position)
+            del self.seals_inventory[seal_num]
+
+    def restock_shop(self):
+
+        seal_count = random.randint(1, 9)
+        for i in range(0, 8):
+            self.seal_offsets[i][0] = random.randint(-10, 10)
+            self.seal_offsets[i][1] = random.randint(-10, 10)
+
+        self.seal_positions = random.sample(range(9), seal_count)
+        for i in range(0, seal_count):
+            seal_loot_pool = self.game_items.seal_lp
+            self.seals_inventory.append(seal_loot_pool[random.randint(0, len(seal_loot_pool) - 1)])
 
     def close_and_select(self, worker):
         self.exit_layer()
@@ -170,10 +197,13 @@ class Game:
             self.layers.pop(0)
 
     def access_shop(self):
-        if self.SHOP_LAYER in self.layers:
-            self.layers.remove(self.SHOP_LAYER)
+        if self.layer != 2:
+            if self.SHOP_LAYER in self.layers:
+                self.layers.remove(self.SHOP_LAYER)
 
-        self.layers.insert(0, self.SHOP_LAYER)
+            self.layers.insert(0, self.SHOP_LAYER)
+        elif self.layer == 2:
+            self.layers.pop(0)
 
     def exit_layer(self):
         if len(self.layers) > 0:
@@ -247,6 +277,13 @@ class Game:
             self.worker_page -= 1
 
     def update(self):
+
+        # time based detection
+        self.current_time = datetime.now()
+        if self.current_time >= self.next_event_time:
+            self.restock_shop()
+            self.next_event_time += timedelta(minutes=self.interval)
+
         if len(self.layers) > 0:
             self.layer = self.layers[0]
         else:

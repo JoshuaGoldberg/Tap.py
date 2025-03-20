@@ -43,11 +43,28 @@ class ItemsManager:
                          "Consumables",
                          lambda: self.game.value_up(1000000000), lambda: None)
 
+        red_seal_img = pygame.image.load('assets/red_seal.png').convert_alpha()
+        red_seal = Item(red_seal_img, "Red Seal",
+                        "A red seal common in these parts. Used to show prestige and boost a persons"
+                        " accessories.",
+                        "Consumables",
+                        lambda: None, lambda: None)
+
+        gold_seal_img = pygame.image.load('assets/gold_seal.png').convert_alpha()
+        gold_seal = Item(gold_seal_img, "Gold Seal",
+                         "A gold seal. Lesser seen, and by extension signifies "
+                         "more value upon items it decorates.",
+                         "Consumables",
+                         lambda: None, lambda: None)
+
         self.item_list = {shovel.name: shovel,
                           twig.name: twig,
                           blueberry.name: blueberry,
                           iron_ore.name: iron_ore,
-                          stone.name: stone}
+                          stone.name: stone,
+                          red_seal.name: red_seal,
+                          gold_seal.name: gold_seal}
 
         self.gather_lp = [twig, blueberry]
         self.mining_lp = [iron_ore, stone]
+        self.seal_lp = [red_seal, gold_seal]
