@@ -47,14 +47,14 @@ class ItemsManager:
         red_seal = Item(red_seal_img, "Red Seal",
                         "A red seal common in these parts. Used to show prestige and boost a persons"
                         " accessories.",
-                        "Consumables",
+                        "Items",
                         lambda: None, lambda: None)
 
         gold_seal_img = pygame.image.load('assets/gold_seal.png').convert_alpha()
         gold_seal = Item(gold_seal_img, "Gold Seal",
                          "A gold seal. Lesser seen, and by extension signifies "
                          "more value upon items it decorates.",
-                         "Consumables",
+                         "Items",
                          lambda: None, lambda: None)
 
         self.item_list = {shovel.name: shovel,
