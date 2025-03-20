@@ -70,6 +70,10 @@ class Game:
         self.current_time = datetime.now()
         self.next_event_time = (self.current_time + timedelta(minutes=self.interval)).replace(second=0, microsecond=0)
         self.restock_shop()
+        self.add_seal_menu = False
+
+    def toggle_seal_add(self):
+        self.add_seal_menu = not self.add_seal_menu
 
     def buy_seal(self, item, cost, position, seal_num):
         if self.value >= cost:
@@ -186,6 +190,7 @@ class Game:
         self.workers_enabled = True
 
     def access_inventory(self):
+        self.add_seal_menu = False
         if self.layer != 1:
             if self.INVENTORY_LAYER in self.layers:
                 self.layers.remove(self.INVENTORY_LAYER)
@@ -218,6 +223,7 @@ class Game:
         self.inventory_unlocked = True
 
     def set_selected_item(self, item):
+        self.add_seal_menu = False
         self.selected_item = item
 
     def add_worker(self):

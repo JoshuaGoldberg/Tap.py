@@ -127,11 +127,17 @@ class InventoryUI:
                     use_button.draw(surface, layer)
 
                 if self.game.selected_item in self.game.accessories_inventory:
+
                     equip_img = pygame.image.load('assets/equip.png').convert_alpha()
 
                     equip_button = Button(1380 + 146.5, 975, equip_img, 3.0,
                                           lambda: self.game.equip_select(self.game.selected_item), None, 1)
                     equip_button.draw(surface, layer)
+
+                    add_seal_img = pygame.image.load('assets/add_seal.png').convert_alpha()
+                    add_seal = Button(1610 + 146.5, 280, add_seal_img, 3.0,
+                                      lambda: self.game.toggle_seal_add(), None, 1)
+                    add_seal.draw(surface, layer)
 
                 trash_img = pygame.image.load('assets/trash.png').convert_alpha()
                 trash_button = Button(1570 + 146.5, 975, trash_img, 3.0,
