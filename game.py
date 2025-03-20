@@ -194,7 +194,8 @@ class Game:
             self.inventory_page = 1
             self.layers.insert(0, self.INVENTORY_LAYER)
         elif self.layer == 1:
-            self.layers.pop(0)
+            if len(self.layers) > 0:
+                self.layers.pop(0)
 
     def access_shop(self):
         if self.layer != 2:
@@ -203,7 +204,8 @@ class Game:
 
             self.layers.insert(0, self.SHOP_LAYER)
         elif self.layer == 2:
-            self.layers.pop(0)
+            if len(self.layers) > 0:
+                self.layers.pop(0)
 
     def exit_layer(self):
         if len(self.layers) > 0:
