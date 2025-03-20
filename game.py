@@ -66,7 +66,7 @@ class Game:
         self.upgrades = []
         self.future_upgrades, self.bought_upgrades = get_upgrades()
         self.select_for_equip = None
-        self.interval = 1
+        self.interval = 0.1
         self.current_time = datetime.now()
         self.next_event_time = (self.current_time + timedelta(minutes=self.interval)).replace(second=0, microsecond=0)
         self.restock_shop()
