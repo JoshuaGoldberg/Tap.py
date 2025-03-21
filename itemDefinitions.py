@@ -57,14 +57,22 @@ class ItemsManager:
                          "Items",
                          lambda: None, lambda: None)
 
+        shadow_seal_img = pygame.image.load('assets/shadow_seal.png').convert_alpha()
+        shadow_seal = Item(shadow_seal_img, "Shadow Seal",
+                           "A dark shadowy seal. Typically symbolic of some sort of dark power or "
+                           "other malicious intent.",
+                           "Items",
+                           lambda: None, lambda: None)
+
         self.item_list = {shovel.name: shovel,
                           twig.name: twig,
                           blueberry.name: blueberry,
                           iron_ore.name: iron_ore,
                           stone.name: stone,
                           red_seal.name: red_seal,
-                          gold_seal.name: gold_seal}
+                          gold_seal.name: gold_seal,
+                          shadow_seal.name: shadow_seal}
 
         self.gather_lp = [twig, blueberry]
         self.mining_lp = [iron_ore, stone]
-        self.seal_lp = [red_seal, gold_seal]
+        self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 95]]

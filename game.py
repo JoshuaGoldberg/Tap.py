@@ -92,7 +92,18 @@ class Game:
         self.seal_positions = random.sample(range(9), seal_count)
         for i in range(0, seal_count):
             seal_loot_pool = self.game_items.seal_lp
-            self.seals_inventory.append(seal_loot_pool[random.randint(0, len(seal_loot_pool) - 1)])
+
+            selected_seal = seal_loot_pool[random.randint(0, len(seal_loot_pool) - 1)]
+            stop_re_roll = False
+
+            while stop_re_roll is False:
+                re_roll_chance = random.randint(0, 100)
+                if re_roll_chance < selected_seal[1]:
+                    selected_seal = seal_loot_pool[random.randint(0, len(seal_loot_pool) - 1)]
+                else:
+                    stop_re_roll = True
+
+            self.seals_inventory.append(selected_seal[0])
 
     def close_and_select(self, worker):
         self.exit_layer()
