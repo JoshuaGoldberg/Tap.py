@@ -126,7 +126,7 @@ class InventoryUI:
 
             offset_x = 0
             for seal in self.game.selected_item.seals:
-                seal_button = Button(1500 + offset_x, 475, seal.image, 6.0,
+                seal_button = Button(1502 + offset_x, 475, seal.image, 6.0,
                                      lambda: None, None, 1)
                 seal_button.draw(surface, layer)
                 offset_x += 60

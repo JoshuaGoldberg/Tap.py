@@ -81,7 +81,7 @@ class Game:
         self.item_inventory[item] -= 1
         if self.item_inventory[item] == 0:
             del self.item_inventory[item]
-            
+
     def toggle_seal_add(self):
         self.add_seal_menu = not self.add_seal_menu
 
