@@ -119,10 +119,11 @@ class InventoryUI:
                 text_wrapper.wrap_text(self.game.selected_item.description, sub_font, 275), sub_font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
-            add_seal_img = pygame.image.load('assets/add_seal.png').convert_alpha()
-            add_seal = Button(1610 + 146.5, 280, add_seal_img, 3.0,
-                              lambda: self.game.toggle_seal_add(), None, 1)
-            add_seal.draw(surface, layer)
+            if self.game.selected_item in self.game.accessories_inventory:
+                add_seal_img = pygame.image.load('assets/add_seal.png').convert_alpha()
+                add_seal = Button(1610 + 146.5, 280, add_seal_img, 3.0,
+                                  lambda: self.game.toggle_seal_add(), None, 1)
+                add_seal.draw(surface, layer)
 
             offset_x = 0
             for seal in self.game.selected_item.seals:
