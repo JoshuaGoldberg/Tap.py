@@ -72,6 +72,16 @@ class Game:
         self.restock_shop()
         self.add_seal_menu = False
 
+    def add_specific_seal(self, seal):
+        if seal in self.item_inventory and len(self.selected_item.seals) < 5:
+            self.trash_specific_item(seal)
+            self.selected_item.seals.append(seal)
+
+    def trash_specific_item(self, item):
+        self.item_inventory[item] -= 1
+        if self.item_inventory[item] == 0:
+            del self.item_inventory[item]
+            
     def toggle_seal_add(self):
         self.add_seal_menu = not self.add_seal_menu
 

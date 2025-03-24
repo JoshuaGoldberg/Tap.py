@@ -13,6 +13,7 @@ class Item:
         self.use_action = use_action
         self.equip_action = equip_action
         self.equipped_by = None
+        self.seals = []
 
     def __key(self):
         return self.name, self.description

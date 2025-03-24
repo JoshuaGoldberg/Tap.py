@@ -12,6 +12,8 @@ class InventoryUI:
         self.game = game
         inventory_base_img = pygame.image.load('assets/inventory.png').convert_alpha()
         self.inventoryBase = UIElement(x, y, inventory_base_img, 8.15)
+        seal_menu_img = pygame.image.load('assets/seal_menu.png').convert_alpha()
+        self.seal_add_menu = UIElement(x + 605, y + 150, seal_menu_img, 13.15)
         self.item_border_img = pygame.image.load('assets/item_border.png').convert_alpha()
 
     def draw(self, surface, layer):
@@ -117,6 +119,18 @@ class InventoryUI:
                 text_wrapper.wrap_text(self.game.selected_item.description, sub_font, 275), sub_font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
+            add_seal_img = pygame.image.load('assets/add_seal.png').convert_alpha()
+            add_seal = Button(1610 + 146.5, 280, add_seal_img, 3.0,
+                              lambda: self.game.toggle_seal_add(), None, 1)
+            add_seal.draw(surface, layer)
+
+            offset_x = 0
+            for seal in self.game.selected_item.seals:
+                seal_button = Button(1500 + offset_x, 475, seal.image, 6.0,
+                                     lambda: None, None, 1)
+                seal_button.draw(surface, layer)
+                offset_x += 60
+
             if self.game.selected_item.equipped_by is None:
 
                 if self.game.selected_item in self.game.consumable_inventory:
@@ -127,22 +141,32 @@ class InventoryUI:
                     use_button.draw(surface, layer)
 
                 if self.game.selected_item in self.game.accessories_inventory:
-
                     equip_img = pygame.image.load('assets/equip.png').convert_alpha()
 
                     equip_button = Button(1380 + 146.5, 975, equip_img, 3.0,
                                           lambda: self.game.equip_select(self.game.selected_item), None, 1)
                     equip_button.draw(surface, layer)
 
-                    add_seal_img = pygame.image.load('assets/add_seal.png').convert_alpha()
-                    add_seal = Button(1610 + 146.5, 280, add_seal_img, 3.0,
-                                      lambda: self.game.toggle_seal_add(), None, 1)
-                    add_seal.draw(surface, layer)
-
                 trash_img = pygame.image.load('assets/trash.png').convert_alpha()
                 trash_button = Button(1570 + 146.5, 975, trash_img, 3.0,
                                       lambda: self.game.trash_item(), None, 1)
                 trash_button.draw(surface, layer)
+
+            if self.game.add_seal_menu is True:
+                self.seal_add_menu.draw(surface)
+                if self.game.game_items.item_list["Red Seal"] in self.game.item_inventory:
+                    red_seal_add = Button(1475, 600, self.game.game_items.item_list["Red Seal"].image, 6.0,
+                                          lambda: self.game.add_specific_seal(
+                                              self.game.game_items.item_list["Red Seal"]),
+                                          None, 1)
+                    red_seal_add.draw(surface, layer)
+
+                if self.game.game_items.item_list["Gold Seal"] in self.game.item_inventory:
+                    gold_seal_add = Button(1535, 600, self.game.game_items.item_list["Gold Seal"].image, 6.0,
+                                           lambda: self.game.add_specific_seal(
+                                               self.game.game_items.item_list["Gold Seal"]),
+                                           None, 1)
+                    gold_seal_add.draw(surface, layer)
 
         for button in temp:
             button.handlePopup(surface, layer)
