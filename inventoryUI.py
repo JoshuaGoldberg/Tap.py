@@ -132,6 +132,11 @@ class InventoryUI:
                 seal_button.draw(surface, layer)
                 offset_x += 60
 
+            for stamp in self.game.selected_item.stamps:
+                stamp_button = Button(1502, 285,  pygame.transform.rotate(stamp.image, 0), 6.0,
+                                      lambda: None, None, 1)
+                stamp_button.draw(surface, layer)
+
             if self.game.selected_item.equipped_by is None:
 
                 if self.game.selected_item in self.game.consumable_inventory:
@@ -168,6 +173,20 @@ class InventoryUI:
                                                self.game.game_items.item_list["Gold Seal"]),
                                            None, 1)
                     gold_seal_add.draw(surface, layer)
+
+                if self.game.game_items.item_list["Shadow Seal"] in self.game.item_inventory:
+                    shadow_seal_add = Button(1595, 600, self.game.game_items.item_list["Shadow Seal"].image, 6.0,
+                                             lambda: self.game.add_specific_seal(
+                                                 self.game.game_items.item_list["Shadow Seal"]),
+                                             None, 1)
+                    shadow_seal_add.draw(surface, layer)
+
+                if self.game.game_items.item_list["Mystic Stamp"] in self.game.item_inventory:
+                    shadow_seal_add = Button(1475, 850, self.game.game_items.item_list["Mystic Stamp"].image, 6.0,
+                                             lambda: self.game.add_specific_stamp(
+                                                 self.game.game_items.item_list["Mystic Stamp"]),
+                                             None, 1)
+                    shadow_seal_add.draw(surface, layer)
 
         for button in temp:
             button.handlePopup(surface, layer)

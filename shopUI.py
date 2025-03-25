@@ -39,6 +39,7 @@ class ShopUI:
             seal = self.seals[seal_num].image
 
             if i in self.seal_positions and seal_num < len(self.seals):
+
                 seal_for_sale = Button(self.offset[0] + 620 + offset_x + self.seal_offsets[i][0],
                                        self.offset[1] + 150 + offset_y + self.seal_offsets[i][1],
                                        seal,

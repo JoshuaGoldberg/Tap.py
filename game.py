@@ -77,6 +77,11 @@ class Game:
             self.trash_specific_item(seal)
             self.selected_item.seals.append(seal)
 
+    def add_specific_stamp(self, stamp):
+        if stamp in self.item_inventory and len(self.selected_item.stamps) < 1:
+            self.trash_specific_item(stamp)
+            self.selected_item.stamps.append(stamp)
+
     def trash_specific_item(self, item):
         self.item_inventory[item] -= 1
         if self.item_inventory[item] == 0:
@@ -92,6 +97,20 @@ class Game:
             self.seal_positions.remove(position)
             del self.seals_inventory[seal_num]
 
+    def add_via_loot_pool(self, inventory, loot_pool):
+
+        selected_item = loot_pool[random.randint(0, len(loot_pool) - 1)]
+        stop_re_roll = False
+
+        while stop_re_roll is False:
+            re_roll_chance = random.randint(0, 100)
+            if re_roll_chance < selected_item[1]:
+                selected_item = loot_pool[random.randint(0, len(loot_pool) - 1)]
+            else:
+                stop_re_roll = True
+
+        inventory.append(selected_item[0])
+
     def restock_shop(self):
 
         seal_count = random.randint(1, 9)
@@ -101,19 +120,12 @@ class Game:
 
         self.seal_positions = random.sample(range(9), seal_count)
         for i in range(0, seal_count):
-            seal_loot_pool = self.game_items.seal_lp
 
-            selected_seal = seal_loot_pool[random.randint(0, len(seal_loot_pool) - 1)]
-            stop_re_roll = False
-
-            while stop_re_roll is False:
-                re_roll_chance = random.randint(0, 100)
-                if re_roll_chance < selected_seal[1]:
-                    selected_seal = seal_loot_pool[random.randint(0, len(seal_loot_pool) - 1)]
-                else:
-                    stop_re_roll = True
-
-            self.seals_inventory.append(selected_seal[0])
+            stamp_random = random.randint(0, 10)
+            if stamp_random > 2:
+                self.add_via_loot_pool(self.seals_inventory, self.game_items.seal_lp)
+            else:
+                self.add_via_loot_pool(self.seals_inventory, self.game_items.stamp_lp)
 
     def close_and_select(self, worker):
         self.exit_layer()

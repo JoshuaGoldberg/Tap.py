@@ -64,6 +64,13 @@ class ItemsManager:
                            "Items",
                            lambda: None, lambda: None)
 
+        mystic_stamp_img = pygame.image.load('assets/c_mystic_stamp.png').convert_alpha()
+        mystic_stamp = Item(mystic_stamp_img, "Mystic Stamp",
+                            "A stamp imbued with magical energy. A mages answers to the royal stamp"
+                            " system. However, you can benefit from using both.",
+                            "Items",
+                            lambda: None, lambda: None)
+
         self.item_list = {shovel.name: shovel,
                           twig.name: twig,
                           blueberry.name: blueberry,
@@ -71,8 +78,10 @@ class ItemsManager:
                           stone.name: stone,
                           red_seal.name: red_seal,
                           gold_seal.name: gold_seal,
-                          shadow_seal.name: shadow_seal}
+                          shadow_seal.name: shadow_seal,
+                          mystic_stamp.name: mystic_stamp}
 
         self.gather_lp = [twig, blueberry]
         self.mining_lp = [iron_ore, stone]
         self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 95]]
+        self.stamp_lp = [[mystic_stamp, 0]]

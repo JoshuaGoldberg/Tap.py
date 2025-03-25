@@ -14,6 +14,7 @@ class Item:
         self.equip_action = equip_action
         self.equipped_by = None
         self.seals = []
+        self.stamps = []
 
     def __key(self):
         return self.name, self.description
