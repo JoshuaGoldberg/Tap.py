@@ -78,14 +78,15 @@ class Game:
             self.selected_item.seals.append(seal)
 
     def add_specific_stamp(self, stamp):
-        if stamp in self.item_inventory and len(self.selected_item.stamps) < 1:
+        if stamp in self.item_inventory and len(self.selected_item.stamps) < 3:
             self.trash_specific_item(stamp)
             self.selected_item.stamps.append(stamp)
 
     def trash_specific_item(self, item):
-        self.item_inventory[item] -= 1
-        if self.item_inventory[item] == 0:
-            del self.item_inventory[item]
+        if item in self.item_inventory:
+            self.item_inventory[item] -= 1
+            if self.item_inventory[item] == 0:
+                del self.item_inventory[item]
 
     def toggle_seal_add(self):
         self.add_seal_menu = not self.add_seal_menu

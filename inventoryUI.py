@@ -132,10 +132,22 @@ class InventoryUI:
                 seal_button.draw(surface, layer)
                 offset_x += 60
 
+            stamp_x = 1502
+            stamp_y = 285
+            counter = 0
             for stamp in self.game.selected_item.stamps:
-                stamp_button = Button(1502, 285,  pygame.transform.rotate(stamp.image, 0), 6.0,
+
+                if counter == 1:
+                    stamp_x = 1567
+                    stamp_y = 300
+                elif counter == 2:
+                    stamp_x = 1522
+                    stamp_y = 355
+
+                stamp_button = Button(stamp_x, stamp_y,  pygame.transform.rotate(stamp.image, 0), 6.0,
                                       lambda: None, None, 1)
                 stamp_button.draw(surface, layer)
+                counter += 1
 
             if self.game.selected_item.equipped_by is None:
 
