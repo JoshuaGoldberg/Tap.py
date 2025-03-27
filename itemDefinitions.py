@@ -109,5 +109,5 @@ class ItemsManager:
 
         self.gather_lp = [twig, blueberry]
         self.mining_lp = [iron_ore, stone]
-        self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 95], [crystal_seal, 10]]
+        self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 95], [crystal_seal, 99]]
         self.stamp_lp = [[mystic_stamp, 0], [voidcaller_stamp, 50], [primo_stamp, 75]]

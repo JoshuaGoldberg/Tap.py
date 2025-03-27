@@ -15,6 +15,8 @@ class InventoryUI:
         seal_menu_img = pygame.image.load('assets/seal_menu.png').convert_alpha()
         self.seal_add_menu = UIElement(x + 605, y + 150, seal_menu_img, 13.15)
         self.item_border_img = pygame.image.load('assets/item_border.png').convert_alpha()
+        self.locked_img = pygame.image.load('assets/locked_seal.png').convert_alpha()
+        self.locked_stamp_img = pygame.image.load('assets/locked_stamp.png').convert_alpha()
 
     def draw(self, surface, layer):
         offset_x = 0
@@ -183,6 +185,11 @@ class InventoryUI:
                                               seal),
                                           None, 1)
                         seal_add.draw(surface, layer)
+                    else:
+                        seal_locked = Button(1475 + offset_x, 600, self.locked_img, 6.0,
+                                             lambda: None,
+                                             None, 1)
+                        seal_locked.draw(surface, layer)
                     offset_x += 60
 
                 offset_x = 0
@@ -194,6 +201,11 @@ class InventoryUI:
                                                stamp),
                                            None, 1)
                         stamp_add.draw(surface, layer)
+                    else:
+                        stamp_locked = Button(1475 + offset_x, 850, self.locked_stamp_img, 6.0,
+                                              lambda: None,
+                                              None, 1)
+                        stamp_locked.draw(surface, layer)
                     offset_x += 70
 
         for button in temp:

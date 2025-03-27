@@ -1,4 +1,5 @@
 from game import *
+from sound_loader import *
 
 
 class Button:
@@ -16,7 +17,6 @@ class Button:
         self.clicked = False
         self.popup = popup
         self.layer = layer
-        self.click_sound = pygame.mixer.Sound('sounds/temp_click.wav')
 
     def draw(self, surface, currLayer):
         pos = pygame.mouse.get_pos()
@@ -27,7 +27,7 @@ class Button:
                     currLayer == self.layer or self.layer == -1) and Button.pressed is False:
                 self.clicked = True
                 Button.pressed = True
-                self.click_sound.play()
+                click_sound.play()
                 self.action()
         else:
             surface.blit(self.image, self.rect)

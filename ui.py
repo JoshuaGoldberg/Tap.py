@@ -29,6 +29,8 @@ class UI:
         self.cursor_img2 = pygame.image.load('assets/cursor_2.png').convert_alpha()
         alert_img = pygame.image.load('assets/alert.png').convert_alpha()
         self.alert = UIElement(107.5, 985, alert_img, 4)
+        self.inventoryScreen = InventoryUI(1019, 560, self.game)
+        self.shopScreen = ShopUI(1019, 560, self.game)
 
         self.button_width = 150
         self.button_height = 60
@@ -115,12 +117,10 @@ class UI:
 
         # INVENTORY MENU
         if self.game.layer == 1:
-            inventoryScreen = InventoryUI(1019, 560, self.game)
-            inventoryScreen.draw(self.screen, self.game.layer)
+            self.inventoryScreen.draw(self.screen, self.game.layer)
 
         if self.game.layer == 2:
-            shopScreen = ShopUI(1019, 560, self.game)
-            shopScreen.draw(self.screen, self.game.layer)
+            self.shopScreen.draw(self.screen, self.game.layer)
 
         cursor = UIElement(mouse_pos[0] + 32, mouse_pos[1] + 32, self.cursor_img, 2.0)
         cursor.draw(self.screen)

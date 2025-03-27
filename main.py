@@ -1,6 +1,7 @@
 import pygame
 from game import Game
 from ui import UI
+import faulthandler
 
 
 def main():
@@ -44,4 +45,5 @@ def main():
 
 
 if __name__ == '__main__':
+    faulthandler.enable()
     main()
