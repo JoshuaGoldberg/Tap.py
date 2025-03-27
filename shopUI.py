@@ -37,7 +37,7 @@ class ShopUI:
         for i in range(0, 9):
 
             seal = None
-            if self.seals[seal_num] is not None:
+            if seal_num < len(self.seals) and self.seals[seal_num] is not None:
                 seal = self.seals[seal_num].image
 
             if i in self.seal_positions and seal_num < len(self.seals):
