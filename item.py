@@ -5,7 +5,7 @@ class Item:
 
     pressed = False
 
-    def __init__(self, image, name, description, classification, use_action, equip_action):
+    def __init__(self, image, name, description, classification, use_action, equip_action, cost):
         self.classification = classification
         self.image = image
         self.name = name
@@ -15,6 +15,7 @@ class Item:
         self.equipped_by = None
         self.seals = []
         self.stamps = []
+        self.cost = cost
 
     def __key(self):
         return self.name, self.description

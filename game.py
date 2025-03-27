@@ -39,16 +39,16 @@ class Game:
         BlueBerry = Item(blue_item_img, "Blue Berry",
                          "A blue berry. "
                          "Note: not a red berry, although it's easy to get confused", "Consumables",
-                         lambda: None, lambda: None)
+                         lambda: None, lambda: None, 10)
         StrangeRock = Item(strange_rock_img, "Strange Rock",
                            "Should it look like this? It really shouldn't look like this."
                            " Nothing good could ever happen by keeping this around, I'm sure of it.",
                            "Items",
-                           lambda: None, lambda: None)
+                           lambda: None, lambda: None, 50)
         BlueBerry2 = Item(blue_item_img, "Bluer Berry",
                           "A bluer berry. Maybe don't trust this one. Bad vibes.",
                           "Consumables",
-                          lambda: None, lambda: None)
+                          lambda: None, lambda: None, 10)
 
         self.game_items = ItemsManager(self)
         self.accessories_inventory = [StrangeRock, self.game_items.item_list["Dev Shovel"]]

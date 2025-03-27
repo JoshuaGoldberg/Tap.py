@@ -47,7 +47,7 @@ class ShopUI:
                                        seal,
                                        6.0,
                                        lambda: self.game.buy_seal(self.seals[seal_num],
-                                                                  5000,
+                                                                  self.seals[seal_num].cost,
                                                                   i,
                                                                   seal_num), None, 2)
 
