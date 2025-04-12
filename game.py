@@ -1,3 +1,5 @@
+import copy
+
 import pygame
 
 import itemDefinitions
@@ -71,6 +73,17 @@ class Game:
         self.next_event_time = (self.current_time + timedelta(minutes=self.interval)).replace(second=0, microsecond=0)
         self.restock_shop()
         self.add_seal_menu = False
+        self.shop_inventory = {StrangeRock: 5, self.game_items.item_list["Dev Shovel"]: 1, BlueBerry: 25}
+        self.shop_page = 1
+
+    def buy_item(self, item):
+        if self.value >= item.cost:
+            self.value -= item.cost
+            self.add_item(item)
+        if item in self.shop_inventory:
+            self.shop_inventory[item] -= 1
+            if self.shop_inventory[item] == 0:
+                del self.shop_inventory[item]
 
     def add_specific_seal(self, seal):
         if seal in self.item_inventory and len(self.selected_item.seals) < 5:
@@ -135,7 +148,7 @@ class Game:
     def add_item(self, item):
         if item.classification == "Accessories":
             self.new_item = True
-            self.accessories_inventory.append(item)
+            self.accessories_inventory.append(item.generate_copy())
         elif item.classification == "Items":
             if item in self.item_inventory:
                 self.item_inventory[item] += 1
@@ -317,6 +330,14 @@ class Game:
     def back_page(self):
         if self.worker_page > 1:
             self.worker_page -= 1
+
+    def forward_shop_page(self):
+        if len(self.shop_inventory) > self.shop_page * 18:
+            self.shop_page += 1
+
+    def back_shop_page(self):
+        if self.shop_page > 1:
+            self.shop_page -= 1
 
     def update(self):
 

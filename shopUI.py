@@ -13,6 +13,7 @@ class ShopUI:
         self.seal_positions = []
         self.seal_offsets = []
         self.cached_seals = None
+        self.small_font = pygame.font.Font("grand9k_pixel/Grand9K Pixel.ttf", 24)
 
     def update_seals(self):
         if self.cached_seals != self.game.seals_inventory:
@@ -29,11 +30,23 @@ class ShopUI:
         exitButton.draw(surface, layer)
         self.update_seals()
 
+        back_img = pygame.image.load('assets/inv_back.png').convert_alpha()
+        back_button = Button(1430, 928, back_img, 2.5,
+                             lambda: self.game.back_shop_page(), None, 2)
+        back_button.draw(surface, layer)
+
+        forward_img = pygame.image.load('assets/inv_forward.png').convert_alpha()
+        forward_button = Button(1520, 928, forward_img, 2.5,
+                                lambda: self.game.forward_shop_page(), None, 2)
+        forward_button.draw(surface, layer)
+
         offset_x = 0
         offset_y = 0
         row_count = 0
         seal_num = 0
+        tempStore = []
 
+        # render in seals
         for i in range(0, 9):
 
             seal = None
@@ -41,7 +54,6 @@ class ShopUI:
                 seal = self.seals[seal_num].image
 
             if i in self.seal_positions and seal_num < len(self.seals):
-
                 seal_for_sale = Button(self.offset[0] + 620 + offset_x + self.seal_offsets[i][0],
                                        self.offset[1] + 150 + offset_y + self.seal_offsets[i][1],
                                        seal,
@@ -60,3 +72,34 @@ class ShopUI:
                 row_count = 0
                 offset_x = 0
                 offset_y += 120
+
+        offset_x = 0
+        offset_y = 50
+        num = 1
+        base = (self.game.shop_page - 1) * 18
+        curr_inventory = copy.copy(self.game.shop_inventory)
+
+        # render in shop items
+        for item in curr_inventory:
+            if base < num <= base + 18:
+                itemButton = Button(291 + offset_x + 10, self.offset[1] + offset_y + 81,
+                                    item.image, 6.0, lambda: self.game.buy_item(item),
+                                    None, 2)
+
+                tempStore.append(itemButton)
+                itemButton.draw(surface, layer)
+
+                if item in curr_inventory:
+                    if curr_inventory[item] > 1:
+                        number_of_item = self.small_font.render(str(curr_inventory[item]), True, (255, 255, 255))
+                        surface.blit(number_of_item, (247 + offset_x, self.offset[1] + 105 + offset_y))
+
+                offset_x += 147
+                if offset_x >= 1300:
+                    offset_x = 0
+                    offset_y += 147
+
+            num += 1
+
+        for button in tempStore:
+            button.handlePopup(surface, layer)

@@ -1,6 +1,6 @@
 import pygame
 
-from item import Item
+from item import *
 
 
 class ItemsManager:
@@ -16,12 +16,12 @@ class ItemsManager:
                                                 " Boosts gathering value by 10 trillion",
                       "Accessories",
                       None,
-                      lambda: shovel.boost_stat(10000000000000, 0), 9999999)
+                      lambda worker: worker.boost_stat(10000000000000, 0), 9999999)
 
         twig = Item(twig_img, "Twig", "A loose twig found in the forest.",
                     "Items",
                     None,
-                    None, 1)
+                    lambda: None, 1)
 
         iron_ore = Item(iron_ore_img, "Iron Ore",
                         "A rock with a chunk of iron ore. Could someday be something greater.",
@@ -41,7 +41,7 @@ class ItemsManager:
                          "A blue berry. "
                          "Note: not a red berry, although it's easy to get confused",
                          "Consumables",
-                         lambda: self.game.value_up(1000000000), lambda: None,1)
+                         lambda: self.game.value_up(1000000000), lambda: None, 1)
 
         red_seal_img = pygame.image.load('assets/red_seal.png').convert_alpha()
         red_seal = Item(red_seal_img, "Red Seal",

@@ -93,7 +93,7 @@ class Worker:
             self.item_bonuses[i] = 1
         for item in self.items:
             if isinstance(item, Item):
-                item.equip_action()
+                item.equip_action(self)
 
         if self.current_activity == "Gathering":
             return (self.gatheringLevel + 1) * self.working_bases[0] * self.item_bonuses[0]
@@ -105,3 +105,6 @@ class Worker:
             return (self.gatheringXP, self.levels[self.gatheringLevel]), self.gatheringLevel
         elif self.current_activity == "Mining":
             return (self.miningXP, self.levels[self.miningLevel]), self.miningLevel
+
+    def boost_stat(self, value, category):
+        self.item_bonuses[category] *= value
