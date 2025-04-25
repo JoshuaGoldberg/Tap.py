@@ -71,10 +71,15 @@ class Game:
         self.interval = 0.1
         self.current_time = datetime.now()
         self.next_event_time = (self.current_time + timedelta(minutes=self.interval)).replace(second=0, microsecond=0)
-        self.restock_shop()
         self.add_seal_menu = False
         self.shop_inventory = {StrangeRock: 5, self.game_items.item_list["Dev Shovel"]: 1, BlueBerry: 25}
         self.shop_page = 1
+        self.common_items_per_restock = 5
+        self.uncommon_items_per_restock = 2
+        self.rare_items_per_restock = 1
+        self.rare_spawn_chance = 5
+
+        self.restock_shop()
 
     def buy_item(self, item):
         if self.value >= item.cost:
@@ -125,9 +130,28 @@ class Game:
 
         inventory.append(selected_item[0])
 
+    def add_to_shop(self, loot_pool, limit, rarity_scaler):
+        rarity = rarity_scaler
+        banned_items = []
+        item_count = random.randint(1, limit)
+        while item_count > 0:
+            if rarity == 0 or random.randint(1, rarity) == 1:
+                if len(banned_items) < len(loot_pool):
+                    selected_item = loot_pool[random.randint(0, len(loot_pool) - 1)]
+                    while selected_item[0] in banned_items:
+                        selected_item = loot_pool[random.randint(0, len(loot_pool) - 1)]
+                    self.shop_inventory.update({selected_item[0]: random.randint(1, selected_item[1])})
+                    banned_items.append(selected_item[0])
+            item_count -= 1
+            rarity *= 2
+
     def restock_shop(self):
         # clear the shop, then populate with new items
-        # self.shop_inventory = {}
+        self.shop_inventory.clear()
+
+        self.add_to_shop(self.game_items.shop_common_lp, self.common_items_per_restock, 0)
+        self.add_to_shop(self.game_items.shop_uncommon_lp, self.uncommon_items_per_restock, 0)
+        self.add_to_shop(self.game_items.shop_rare_lp, self.rare_items_per_restock, self.rare_spawn_chance)
 
         seal_count = random.randint(1, 9)
         for i in range(0, 8):

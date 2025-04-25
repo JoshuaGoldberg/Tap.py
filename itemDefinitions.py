@@ -21,20 +21,20 @@ class ItemsManager:
         twig = Item(twig_img, "Twig", "A loose twig found in the forest.",
                     "Items",
                     None,
-                    lambda: None, 1)
+                    lambda: None, 25)
 
         iron_ore = Item(iron_ore_img, "Iron Ore",
                         "A rock with a chunk of iron ore. Could someday be something greater.",
                         "Items",
                         None,
-                        None, 1)
+                        None, 150)
 
-        stone = Item(stone_img, "Iron Ore",
+        stone = Item(stone_img, "Stone",
                      "Stone, from deep within the mines. "
                      "Unremarkable, but nevertheless a vital building block for your journey.",
                      "Items",
                      None,
-                     None, 1)
+                     None, 50)
 
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         blueberry = Item(blue_item_img, "Blue Berry",
@@ -112,3 +112,6 @@ class ItemsManager:
         self.mining_lp = [iron_ore, stone]
         self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 95], [crystal_seal, 50]]
         self.stamp_lp = [[mystic_stamp, 0], [voidcaller_stamp, 50], [primo_stamp, 75]]
+        self.shop_common_lp = [[blueberry, 15], [stone, 25]]
+        self.shop_uncommon_lp = [[iron_ore, 5]]
+        self.shop_rare_lp = [[shovel, 1]]
