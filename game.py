@@ -126,6 +126,8 @@ class Game:
         inventory.append(selected_item[0])
 
     def restock_shop(self):
+        # clear the shop, then populate with new items
+        # self.shop_inventory = {}
 
         seal_count = random.randint(1, 9)
         for i in range(0, 8):

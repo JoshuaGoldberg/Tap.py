@@ -22,7 +22,7 @@ class Item:
         self.ID += 1
 
     def generate_copy(self):
-        new_item = copy.copy(self)
+        new_item = Item(self.image, self.name, self.description, self.classification, self.use_action, self.equip_action, self.cost)
         new_item.id = self.ID
         self.ID += 1
         return new_item
