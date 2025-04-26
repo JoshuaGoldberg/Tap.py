@@ -4,6 +4,7 @@ from sound_loader import *
 
 class Button:
     pressed = False
+    all_buttons = []
 
     def __init__(self, x, y, image, scale, action, popup, layer):
         width = image.get_width()
@@ -19,8 +20,8 @@ class Button:
         self.layer = layer
 
     def draw(self, surface, currLayer):
+        self.all_buttons.append(self)
         pos = pygame.mouse.get_pos()
-
         if self.rect.collidepoint(pos):
             surface.blit(self.altImage, self.alt_rect)
             if pygame.mouse.get_pressed()[0] == 1 and not self.clicked and (

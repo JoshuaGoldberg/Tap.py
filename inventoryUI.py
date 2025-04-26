@@ -75,7 +75,6 @@ class InventoryUI:
         item_in_row = 0
         item_num = (curr_page - 1) * 40
         curr_num = 0
-        temp = []
 
         for item in curr_inventory:
             if item_num <= curr_num < item_num + 40:
@@ -99,7 +98,6 @@ class InventoryUI:
                                            lambda: self.game.close_and_select(item.equipped_by),
                                            display_popup("Equipped by:", worker.firstname + " " + worker.lastname), 1)
                     equipped_icon.draw(surface, layer)
-                    temp.append(equipped_icon)
 
                 item_in_row += 1
                 offset_x += 146.5
@@ -207,6 +205,3 @@ class InventoryUI:
                                               None, 1)
                         stamp_locked.draw(surface, layer)
                     offset_x += 70
-
-        for button in temp:
-            button.handlePopup(surface, layer)

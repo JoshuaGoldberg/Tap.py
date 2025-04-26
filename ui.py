@@ -82,6 +82,7 @@ class UI:
             return str(round(number, 3)) + " " + self.number_titles[acc]
 
     def draw(self):
+        Button.all_buttons.clear()
 
         mouse_pos = pygame.mouse.get_pos()
         self.screen.fill((30, 30, 30))
@@ -124,3 +125,6 @@ class UI:
 
         cursor = UIElement(mouse_pos[0] + 32, mouse_pos[1] + 32, self.cursor_img, 2.0)
         cursor.draw(self.screen)
+
+        for button in Button.all_buttons:
+            button.handlePopup(self.screen, self.game.layer)
