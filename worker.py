@@ -56,6 +56,10 @@ class Worker:
             if self.items[index] is not None:
                 self.items[index].equipped_by = None
                 self.items[index] = None
+            else:
+                if self.game.inventory_unlocked:
+                    self.game.set_inventory_tab("Accessories")
+                    self.game.access_inventory()
 
     def remove_items(self):
         for item in self.items:
@@ -93,7 +97,8 @@ class Worker:
             self.item_bonuses[i] = 1
         for item in self.items:
             if isinstance(item, Item):
-                item.equip_action(self)
+                for effect in item.equip_action:
+                    effect(self)
 
         if self.current_activity == "Gathering":
             return (self.gatheringLevel + 1) * self.working_bases[0] * self.item_bonuses[0]

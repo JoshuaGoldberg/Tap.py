@@ -5,6 +5,16 @@ from popup import *
 
 class ShopUI:
     def __init__(self, x, y, game):
+        self.bg_img = pygame.image.load('assets/shop.png').convert_alpha()
+        self.x_img = pygame.image.load('assets/x.png').convert_alpha()
+        self.back_img = pygame.image.load('assets/inv_back.png').convert_alpha()
+        self.fwd_img = pygame.image.load('assets/inv_forward.png').convert_alpha()
+        self.exit_button = Button(x + 720, y - 425, self.x_img, 2.0,
+                                  lambda: self.game.exit_layer(), None, 2)
+        self.back_button = Button(1430, 928, self.back_img, 2.5,
+                                  lambda: self.game.back_shop_page(), None, 2)
+        self.forward_button = Button(1520, 928, self.fwd_img, 2.5,
+                                     lambda: self.game.forward_shop_page(), None, 2)
         self.offset = (x, y)
         self.game = game
         shop_background_img = pygame.image.load('assets/shop.png').convert_alpha()
@@ -24,27 +34,17 @@ class ShopUI:
 
     def draw(self, surface, layer):
         self.upgradeBase.draw(surface)
-        x_img = pygame.image.load('assets/x.png').convert_alpha()
-        exitButton = Button(self.offset[0] + 720, self.offset[1] - 425, x_img, 2.0,
-                            lambda: self.game.exit_layer(), None, 2)
-        exitButton.draw(surface, layer)
+        self.exit_button.draw(surface, layer)
         self.update_seals()
 
-        back_img = pygame.image.load('assets/inv_back.png').convert_alpha()
-        back_button = Button(1430, 928, back_img, 2.5,
-                             lambda: self.game.back_shop_page(), None, 2)
-        back_button.draw(surface, layer)
+        self.back_button.draw(surface, layer)
 
-        forward_img = pygame.image.load('assets/inv_forward.png').convert_alpha()
-        forward_button = Button(1520, 928, forward_img, 2.5,
-                                lambda: self.game.forward_shop_page(), None, 2)
-        forward_button.draw(surface, layer)
+        self.forward_button.draw(surface, layer)
 
         offset_x = 0
         offset_y = 0
         row_count = 0
         seal_num = 0
-        tempStore = []
 
         # render in seals
         for i in range(0, 9):
@@ -62,8 +62,10 @@ class ShopUI:
                                                                   self.seals[seal_num].cost,
                                                                   i,
                                                                   seal_num),
-                                       display_popup(self.seals[seal_num].name, self.seals[seal_num].description + "\n\nCost: "
-                                                     + self.game.format_number(self.seals[seal_num].cost) + " Value"), 2)
+                                       display_popup(self.seals[seal_num].name,
+                                                     self.seals[seal_num].description + "\n\nCost: "
+                                                     + self.game.format_number(self.seals[seal_num].cost) + " Value"),
+                                       2)
 
                 seal_for_sale.draw(surface, layer)
                 seal_num += 1
@@ -90,7 +92,6 @@ class ShopUI:
                                                   item.description + "\n\nCost: "
                                                   + self.game.format_number(item.cost) + " Value"), 2)
 
-                tempStore.append(itemButton)
                 itemButton.draw(surface, layer)
 
                 if item in curr_inventory:
@@ -104,6 +105,3 @@ class ShopUI:
                     offset_y += 147
 
             num += 1
-
-        for button in tempStore:
-            button.handlePopup(surface, layer)
