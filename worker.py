@@ -103,7 +103,7 @@ class Worker:
         for item in self.items:
             if isinstance(item, Item):
                 for effect in item.equip_action:
-                    effect(self)
+                    effect.action(self)
 
         if self.current_activity == "Gathering":
             return (self.gatheringLevel + 1) * self.working_bases[0] * self.item_bonuses[0]

@@ -2,6 +2,8 @@ import copy
 
 import pygame
 
+from numberFormatter import format_number
+
 
 class Item:
     pressed = False
@@ -45,8 +47,45 @@ class Item:
             total += seal.seal_bonus
         return total
 
+    def provide_additional_text(self):
+        if self.calculate_seal_bonus() > 0:
+            return "\nSeal amplification: x" + str(self.calculate_seal_bonus() + 1)
+        else:
+            return ""
+
+    def item_description_text(self):
+        text = self.description
+        bonus = self.calculate_seal_bonus()
+        for action in self.equip_action:
+            text = text + action.provide_text(bonus + 1) + "\n"
+        text = text + self.provide_additional_text()
+
+        return text
+
 
 class Seal(Item):
     def __init__(self, image, name, description, classification, use_action, equip_action, cost, seal_bonus):
         super().__init__(image, name, description, classification, use_action, equip_action, cost)
         self.seal_bonus = seal_bonus
+
+
+class BaseBoost:
+    def __init__(self, skill, category, value):
+        self.skill = skill
+        self.value = value
+        self.action = lambda worker: worker.boost_stat(self.value, category)
+
+    def provide_text(self, amp):
+        return "Boosts base " + self.skill + " by " + format_number(self.value * amp) + "."
+
+
+class BonusSlot:
+    def __init__(self, value):
+        self.value = value
+        self.action = lambda worker: worker.add_bonus_slots(self.value)
+
+    def provide_text(self, amp):
+        if self.value * amp == 1:
+            return "Provides an additional worker slot."
+        else:
+            return "Provides " + format_number(self.value * amp) + " additional worker slots."

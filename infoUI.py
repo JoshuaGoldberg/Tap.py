@@ -59,7 +59,7 @@ class InfoUI:
                     if isinstance(select_item, Item):
                         slotted_item = Button(self.offset[0] - 180 + slot_offset_x, self.offset[1] + 290,
                                               select_item.image, 5.0,
-                                              lambda: None, display_popup(select_item.name, select_item.description +
+                                              lambda: None, display_popup(select_item.name, select_item.item_description_text() +
                                                                           "\n" + "Click to unequip."), 0)
                         temp.append(slotted_item)
                         slotted_item.draw(surface, layer)

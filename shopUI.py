@@ -89,7 +89,7 @@ class ShopUI:
                 itemButton = Button(291 + offset_x + 10, self.offset[1] + offset_y + 81,
                                     item.image, 6.0, lambda: self.game.buy_item(item),
                                     display_popup(item.name,
-                                                  item.description + "\n\nCost: "
+                                                  item.item_description_text() + "\n\nCost: "
                                                   + self.game.format_number(item.cost) + " Value"), 2)
 
                 itemButton.draw(surface, layer)

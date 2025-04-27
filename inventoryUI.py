@@ -115,8 +115,9 @@ class InventoryUI:
             item_icon.draw(surface, layer)
             item_name = font.render(self.game.selected_item.name, True, (255, 255, 255))
             surface.blit(item_name, (self.offset[0] + 470, self.offset[1] - 15))
+            additional_text = self.game.selected_item.provide_additional_text()
             text = text_wrapper.render_text_list(
-                text_wrapper.wrap_text(self.game.selected_item.description, sub_font, 275), sub_font)
+                text_wrapper.wrap_text(self.game.selected_item.item_description_text(), sub_font, 275), sub_font)
             surface.blit(text, (self.offset[0] + 470, self.offset[1] + 50))
 
             if self.game.selected_item in self.game.accessories_inventory:

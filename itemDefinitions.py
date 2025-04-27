@@ -17,16 +17,15 @@ class ItemsManager:
         stone_img = pygame.image.load('assets/stone.png').convert_alpha()
         forget_img = pygame.image.load('assets/TheWorldForget.png').convert_alpha()
 
-        shovel = Item(shovel_img, "Dev Shovel", "The long lost developer shovel."
-                                                " Boosts gathering value by 10 trillion",
+        shovel = Item(shovel_img, "Dev Shovel", "The long lost developer shovel.\n",
                       "Accessories",
                       None,
-                      [lambda worker: worker.boost_stat(10000000000000, GATHERING)], 9999999)
+                      [BaseBoost("gathering", GATHERING, 10000000000000)], 9999999)
 
-        pickaxe = Item(pickaxe_img, "Standard Pickaxe", "A standard pickaxe for mining. Boosts base mining value by 5.",
+        pickaxe = Item(pickaxe_img, "Standard Pickaxe", "A standard pickaxe for mining.\n",
                        "Accessories",
                        None,
-                       [lambda worker: worker.boost_stat(5, MINING)], 5000)
+                       [BaseBoost("mining", MINING, 5)], 5000)
 
         twig = Item(twig_img, "Twig", "A loose twig found in the forest.",
                     "Items",
@@ -48,10 +47,10 @@ class ItemsManager:
 
         special_stone = Item(forget_img, "\"The World, Forget\"",
                              "A rock with a shining purple glow to it. Anyone who holds it seems to disappear"
-                             "from reality entirely ...",
+                             "from reality entirely ...\n",
                              "Accessories",
                              None,
-                             [lambda worker: worker.add_bonus_slots(1)], 40000000)
+                             [BonusSlot(1)], 40000000)
 
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         blueberry = Item(blue_item_img, "Blue Berry",
