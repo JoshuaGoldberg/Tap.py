@@ -61,7 +61,9 @@ class ShopUI:
                                        lambda: self.game.buy_seal(self.seals[seal_num],
                                                                   self.seals[seal_num].cost,
                                                                   i,
-                                                                  seal_num), None, 2)
+                                                                  seal_num),
+                                       display_popup(self.seals[seal_num].name, self.seals[seal_num].description + "\n\nCost: "
+                                                     + self.game.format_number(self.seals[seal_num].cost) + " Value"), 2)
 
                 seal_for_sale.draw(surface, layer)
                 seal_num += 1
@@ -84,7 +86,9 @@ class ShopUI:
             if base < num <= base + 18:
                 itemButton = Button(291 + offset_x + 10, self.offset[1] + offset_y + 81,
                                     item.image, 6.0, lambda: self.game.buy_item(item),
-                                    None, 2)
+                                    display_popup(item.name,
+                                                  item.description + "\n\nCost: "
+                                                  + self.game.format_number(item.cost) + " Value"), 2)
 
                 tempStore.append(itemButton)
                 itemButton.draw(surface, layer)

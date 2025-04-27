@@ -14,6 +14,14 @@ from datetime import datetime, timedelta
 class Game:
 
     def __init__(self, width, height, fps):
+        self.number_titles = ["Million", "Billion", "Trillion",
+                              "Quadrillion", "Quintillion", "Sextillion",
+                              "Septillion", "Octillion", "Nonillion",
+                              "Decillion", "Undecillion", "Duodecillion",
+                              "Tredecillion", "Quattuordecillion",
+                              "Quindecillion", "Sexdecillion",
+                              "Septdecillion", "Octodecillion",
+                              "Novemdecillion", "Vigintillion"]
         self.fps = fps
         self.width = width
         self.height = height
@@ -80,6 +88,18 @@ class Game:
         self.rare_spawn_chance = 5
 
         self.restock_shop()
+
+    def format_number(self, number):
+        if number > 999999:
+            return self.format_number_helper(number / 1000000, 0)
+        else:
+            return str(number)
+
+    def format_number_helper(self, number, acc):
+        if number >= 1000:
+            return self.format_number_helper(number / 1000, acc + 1)
+        else:
+            return str(round(number, 3)) + " " + self.number_titles[acc]
 
     def buy_item(self, item):
         if self.value >= item.cost:
