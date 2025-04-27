@@ -63,7 +63,7 @@ class ShopUI:
                                                                   i,
                                                                   seal_num),
                                        display_popup(self.seals[seal_num].name,
-                                                     self.seals[seal_num].description + "\n\nCost: "
+                                                     self.seals[seal_num].description + "\nCost: "
                                                      + self.game.format_number(self.seals[seal_num].cost) + " Value"),
                                        2)
 
@@ -89,7 +89,7 @@ class ShopUI:
                 itemButton = Button(291 + offset_x + 10, self.offset[1] + offset_y + 81,
                                     item.image, 6.0, lambda: self.game.buy_item(item),
                                     display_popup(item.name,
-                                                  item.item_description_text() + "\n\nCost: "
+                                                  item.item_description_text() + "\nCost: "
                                                   + self.game.format_number(item.cost) + " Value"), 2)
 
                 itemButton.draw(surface, layer)

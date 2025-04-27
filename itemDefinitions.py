@@ -27,20 +27,20 @@ class ItemsManager:
                        None,
                        [BaseBoost("mining", MINING, 5)], 5000)
 
-        twig = Item(twig_img, "Twig", "A loose twig found in the forest.",
+        twig = Item(twig_img, "Twig", "A loose twig found in the forest.\n",
                     "Items",
                     None,
                     [], 25)
 
         iron_ore = Item(iron_ore_img, "Iron Ore",
-                        "A rock with a chunk of iron ore. Could someday be something greater.",
+                        "A rock with a chunk of iron ore. Could someday be something greater.\n",
                         "Items",
                         None,
                         [], 150)
 
         stone = Item(stone_img, "Stone",
                      "Stone, from deep within the mines. "
-                     "Unremarkable, but nevertheless a vital building block for your journey.",
+                     "Unremarkable, but nevertheless a vital building block for your journey.\n",
                      "Items",
                      None,
                      [], 50)
@@ -55,28 +55,28 @@ class ItemsManager:
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         blueberry = Item(blue_item_img, "Blue Berry",
                          "A blue berry. "
-                         "Note: not a red berry, although it's easy to get confused",
+                         "Note: not a red berry, although it's easy to get confused.\n",
                          "Consumables",
                          lambda: self.game.value_up(1000000000), [], 1)
 
         red_seal_img = pygame.image.load('assets/red_seal.png').convert_alpha()
         red_seal = Seal(red_seal_img, "Red Seal",
                         "A red seal common in these parts. Used to show prestige and boost a persons"
-                        " accessories.",
+                        " accessories.\n",
                         "Items",
                         lambda: None, [], 5000, 1)
 
         gold_seal_img = pygame.image.load('assets/gold_seal.png').convert_alpha()
         gold_seal = Seal(gold_seal_img, "Gold Seal",
                          "A gold seal. Lesser seen, and by extension signifies "
-                         "more value upon items it decorates.",
+                         "more value upon items it decorates.\n",
                          "Items",
                          lambda: None, [], 50000, 2)
 
         shadow_seal_img = pygame.image.load('assets/shadow_seal.png').convert_alpha()
         shadow_seal = Seal(shadow_seal_img, "Shadow Seal",
                            "A dark shadowy seal. Typically symbolic of some sort of dark power or "
-                           "other malicious intent.",
+                           "other malicious intent.\n",
                            "Items",
                            lambda: None, [], 65000000, 5)
 
@@ -85,14 +85,14 @@ class ItemsManager:
                             "A odd seal decorated with a crystalline appearance. Shimmers under the light. "
                             "Such craftsmanship is not typical to these lands. Perhaps the winds of trade brought it "
                             "here"
-                            "from afar.",
+                            "from afar.\n",
                             "Items",
                             lambda: None, [], 8000000000, 2)
 
         mystic_stamp_img = pygame.image.load('assets/c_mystic_stamp.png').convert_alpha()
         mystic_stamp = Item(mystic_stamp_img, "Mystic Stamp",
                             "A stamp imbued with magical energy. A mages answers to the royal stamp"
-                            " system. However, you can benefit from using both.",
+                            " system. However, you can benefit from using both.\n",
                             "Items",
                             lambda: None, [], 150000)
 
@@ -100,14 +100,14 @@ class ItemsManager:
         voidcaller_stamp = Item(void_caller_stamp_img, "Voidcaller Stamp",
                                 "A stamp imbued with magical energy. In particular, this one"
                                 " has been altered with dark energy by radical mages of the kingdom. Great power, "
-                                "but also great risk...",
+                                "but also great risk...\n",
                                 "Items",
                                 lambda: None, [], 900000000)
 
         primo_img = pygame.image.load('assets/primo.png').convert_alpha()
         primo_stamp = Item(primo_img, "Primordial Stamp",
                            "A crystalline stamp with an odd shimmer. The material is not from these lands, "
-                           "perhaps brought from overseas. Whatever it does will surely be unique!",
+                           "perhaps brought from overseas. Whatever it does will surely be unique!\n",
                            "Items",
                            lambda: None, [], 15000000000)
 
