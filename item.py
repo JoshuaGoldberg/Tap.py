@@ -22,7 +22,8 @@ class Item:
         self.ID += 1
 
     def generate_copy(self):
-        new_item = Item(self.image, self.name, self.description, self.classification, self.use_action, self.equip_action, self.cost)
+        new_item = Item(self.image, self.name, self.description, self.classification, self.use_action,
+                        self.equip_action, self.cost)
         new_item.id = self.ID
         self.ID += 1
         return new_item
@@ -37,3 +38,15 @@ class Item:
         if isinstance(other, Item):
             return self.__key() == other.__key()
         return NotImplemented
+
+    def calculate_seal_bonus(self):
+        total = 0
+        for seal in self.seals:
+            total += seal.seal_bonus
+        return total
+
+
+class Seal(Item):
+    def __init__(self, image, name, description, classification, use_action, equip_action, cost, seal_bonus):
+        super().__init__(image, name, description, classification, use_action, equip_action, cost)
+        self.seal_bonus = seal_bonus

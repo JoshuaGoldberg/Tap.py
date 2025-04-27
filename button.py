@@ -7,7 +7,7 @@ class Button:
     pressed = False
     all_buttons = []
 
-    def __init__(self, x, y, image, scale, action, popup, layer):
+    def __init__(self, x, y, image, scale, action, popup_message, layer):
         width = image.get_width()
         height = image.get_height()
         # Scale the images
@@ -17,7 +17,7 @@ class Button:
         self.alt_rect = self.altImage.get_rect(center=(x, y))
         self.action = action
         self.clicked = False
-        self.popup = popup
+        self.popup = popup_message
         self.layer = layer
 
     def draw(self, surface, currLayer):

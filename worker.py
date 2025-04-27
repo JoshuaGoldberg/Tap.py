@@ -42,6 +42,7 @@ class Worker:
         self.fps = fps
         self.slot_count = 1
         self.equip_sound = pygame.mixer.Sound('sounds/equip.wav')
+        self.total_seal_bonus = 1
 
     def handle_equip(self, index):
         if self.game.select_for_equip is not None:
@@ -93,8 +94,12 @@ class Worker:
                 self.miningLevel += 1
 
     def calculate_val(self):
+        self.total_seal_bonus = 1
         for i in range(0, len(self.item_bonuses)):
             self.item_bonuses[i] = 1
+        for item in self.items:
+            if isinstance(item, Item):
+                self.total_seal_bonus += item.calculate_seal_bonus()
         for item in self.items:
             if isinstance(item, Item):
                 for effect in item.equip_action:
@@ -111,5 +116,8 @@ class Worker:
         elif self.current_activity == "Mining":
             return (self.miningXP, self.levels[self.miningLevel]), self.miningLevel
 
+    def add_bonus_slots(self, amt):
+        self.game.add_bonus_slots(amt * self.total_seal_bonus)
+
     def boost_stat(self, value, category):
-        self.item_bonuses[category] *= value
+        self.item_bonuses[category] *= (value * self.total_seal_bonus)

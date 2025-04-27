@@ -51,7 +51,7 @@ class ItemsManager:
                              "from reality entirely ...",
                              "Accessories",
                              None,
-                             [lambda worker: worker.game.add_bonus_slots(1)], 40000000)
+                             [lambda worker: worker.add_bonus_slots(1)], 40000000)
 
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         blueberry = Item(blue_item_img, "Blue Berry",
@@ -61,34 +61,34 @@ class ItemsManager:
                          lambda: self.game.value_up(1000000000), [], 1)
 
         red_seal_img = pygame.image.load('assets/red_seal.png').convert_alpha()
-        red_seal = Item(red_seal_img, "Red Seal",
+        red_seal = Seal(red_seal_img, "Red Seal",
                         "A red seal common in these parts. Used to show prestige and boost a persons"
                         " accessories.",
                         "Items",
-                        lambda: None, [], 5000)
+                        lambda: None, [], 5000, 1)
 
         gold_seal_img = pygame.image.load('assets/gold_seal.png').convert_alpha()
-        gold_seal = Item(gold_seal_img, "Gold Seal",
+        gold_seal = Seal(gold_seal_img, "Gold Seal",
                          "A gold seal. Lesser seen, and by extension signifies "
                          "more value upon items it decorates.",
                          "Items",
-                         lambda: None, [], 50000)
+                         lambda: None, [], 50000, 2)
 
         shadow_seal_img = pygame.image.load('assets/shadow_seal.png').convert_alpha()
-        shadow_seal = Item(shadow_seal_img, "Shadow Seal",
+        shadow_seal = Seal(shadow_seal_img, "Shadow Seal",
                            "A dark shadowy seal. Typically symbolic of some sort of dark power or "
                            "other malicious intent.",
                            "Items",
-                           lambda: None, [], 65000000)
+                           lambda: None, [], 65000000, 5)
 
         crystal_seal_img = pygame.image.load('assets/crystal_seal.png').convert_alpha()
-        crystal_seal = Item(crystal_seal_img, "Crystal Seal",
+        crystal_seal = Seal(crystal_seal_img, "Crystal Seal",
                             "A odd seal decorated with a crystalline appearance. Shimmers under the light. "
                             "Such craftsmanship is not typical to these lands. Perhaps the winds of trade brought it "
                             "here"
                             "from afar.",
                             "Items",
-                            lambda: None, [], 8000000000)
+                            lambda: None, [], 8000000000, 2)
 
         mystic_stamp_img = pygame.image.load('assets/c_mystic_stamp.png').convert_alpha()
         mystic_stamp = Item(mystic_stamp_img, "Mystic Stamp",
