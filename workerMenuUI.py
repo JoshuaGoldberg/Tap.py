@@ -18,7 +18,7 @@ class WorkerMenuUI:
         offset_y = 0
 
         self.workerBase.draw(surface)
-        capacity_text = self.font.render("Capacity: " + str(len(self.game.workers)) + "/" + str(self.game.max_workers),
+        capacity_text = self.font.render("Capacity: " + str(len(self.game.workers)) + "/" + str(self.game.max_workers + self.game.bonus_worker_slots),
                                          True, (255, 255, 255))
 
         surface.blit(capacity_text, (self.offset[0] - 190, self.offset[1] - 360))

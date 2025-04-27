@@ -86,6 +86,7 @@ class Game:
         self.uncommon_items_per_restock = 2
         self.rare_items_per_restock = 1
         self.rare_spawn_chance = 5
+        self.bonus_worker_slots = 0
 
         self.restock_shop()
 
@@ -319,6 +320,9 @@ class Game:
         self.add_seal_menu = False
         self.selected_item = item
 
+    def add_bonus_slots(self, amt):
+        self.bonus_worker_slots += amt
+
     def add_worker(self):
         cost = int(100 * (1.1 ** len(self.workers)))
 
@@ -333,7 +337,7 @@ class Game:
         elif random_face == 4:
             worker_face_string = 'assets/worker_green.png'
 
-        if self.value >= cost and len(self.workers) < self.max_workers:
+        if self.value >= cost and len(self.workers) < (self.max_workers + self.bonus_worker_slots):
             self.value -= cost
             worker_img = pygame.image.load(worker_face_string).convert_alpha()
             worker = Worker(self.curr_id, worker_img, self, self.fps, self.game_items)
@@ -388,6 +392,7 @@ class Game:
     def update(self):
 
         # time based detection
+        self.bonus_worker_slots = 0
         self.current_time = datetime.now()
         if self.current_time >= self.next_event_time:
             self.restock_shop()

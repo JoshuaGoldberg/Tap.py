@@ -2,12 +2,16 @@ import pygame
 
 from item import *
 
+GATHERING = 0
+MINING = 1
+
 
 class ItemsManager:
 
     def __init__(self, game):
         self.game = game
         shovel_img = pygame.image.load('assets/shovel.png').convert_alpha()
+        pickaxe_img = pygame.image.load('assets/pickaxe.png').convert_alpha()
         twig_img = pygame.image.load('assets/twig.png').convert_alpha()
         iron_ore_img = pygame.image.load('assets/iron_ore.png').convert_alpha()
         stone_img = pygame.image.load('assets/stone.png').convert_alpha()
@@ -16,7 +20,12 @@ class ItemsManager:
                                                 " Boosts gathering value by 10 trillion",
                       "Accessories",
                       None,
-                      lambda worker: worker.boost_stat(10000000000000, 0), 9999999)
+                      lambda worker: worker.boost_stat(10000000000000, GATHERING), 9999999)
+
+        pickaxe = Item(pickaxe_img, "Standard Pickaxe", "A standard pickaxe for mining. Boosts base mining value by 5.",
+                       "Accessories",
+                       None,
+                       lambda worker: worker.boost_stat(5, MINING), 5000)
 
         twig = Item(twig_img, "Twig", "A loose twig found in the forest.",
                     "Items",
@@ -35,6 +44,12 @@ class ItemsManager:
                      "Items",
                      None,
                      None, 50)
+
+        special_stone = Item(stone_img, "Special Stone",
+                             "Seems to make the holder invisible.",
+                             "Accessories",
+                             None,
+                             lambda worker: worker.game.add_bonus_slots(1), 40000000)
 
         blue_item_img = pygame.image.load('assets/blue_berry.png').convert_alpha()
         blueberry = Item(blue_item_img, "Blue Berry",
@@ -96,10 +111,12 @@ class ItemsManager:
                            lambda: None, lambda: None, 15000000000)
 
         self.item_list = {shovel.name: shovel,
+                          pickaxe.name: pickaxe,
                           twig.name: twig,
                           blueberry.name: blueberry,
                           iron_ore.name: iron_ore,
                           stone.name: stone,
+                          special_stone.name: special_stone,
                           red_seal.name: red_seal,
                           gold_seal.name: gold_seal,
                           shadow_seal.name: shadow_seal,
@@ -113,5 +130,5 @@ class ItemsManager:
         self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 95], [crystal_seal, 50]]
         self.stamp_lp = [[mystic_stamp, 0], [voidcaller_stamp, 50], [primo_stamp, 75]]
         self.shop_common_lp = [[blueberry, 15], [stone, 25]]
-        self.shop_uncommon_lp = [[iron_ore, 5]]
+        self.shop_uncommon_lp = [[iron_ore, 5], [pickaxe, 3], [special_stone, 10]]
         self.shop_rare_lp = [[shovel, 1]]
