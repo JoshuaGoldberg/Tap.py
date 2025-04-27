@@ -44,8 +44,8 @@ class Button:
             if self.popup is not None:
                 x_pos = 60
                 y_pos = 0
-                if pos[0] > 1610:
-                    x_pos = -310
-                if pos[1] + self.popup.get_height() > 1075:
-                    y_pos = pos[1] + self.popup.get_height() - 1075
+                if pos[0] > 1605:
+                    x_pos = -315
+                if pos[1] + self.popup.get_height() > 1070:
+                    y_pos = pos[1] + self.popup.get_height() - 1070
                 surface.blit(self.popup, (pos[0] + x_pos, pos[1] - y_pos))
