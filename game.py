@@ -114,7 +114,7 @@ class Game:
     def add_specific_seal(self, seal):
         if seal in self.item_inventory and len(self.selected_item.seals) < 5:
             self.trash_specific_item(seal)
-            self.selected_item.seals.append(seal)
+            self.selected_item.seals.append(seal.generate_copy())
 
     def add_specific_stamp(self, stamp):
         if stamp in self.item_inventory and len(self.selected_item.stamps) < 3:

@@ -74,11 +74,15 @@ class ItemsManager:
                          lambda: None, [], 50000, 2)
 
         shadow_seal_img = pygame.image.load('assets/shadow_seal.png').convert_alpha()
-        shadow_seal = Seal(shadow_seal_img, "Shadow Seal",
-                           "A dark shadowy seal. Typically symbolic of some sort of dark power or "
-                           "other malicious intent.\n",
-                           "Items",
-                           lambda: None, [], 65000000, 5)
+        shadow_seal = EffectSeal(shadow_seal_img, "Shadow Seal",
+                                 "A dark shadowy seal. Typically symbolic of some sort of dark power or "
+                                 "other malicious intent.\n",
+                                 "Items",
+                                 lambda: None, [], 65000000, 5,
+                                 [[BonusSlot(1), 50], [BaseBoost("mining", MINING, 5), 0],
+                                  [BaseBoost("gathering", GATHERING, 5), 0],
+                                  [BaseBoost("mining", MINING, 15), 50],
+                                  [BaseBoost("gathering", GATHERING, 20), 75]], 1, False)
 
         crystal_seal_img = pygame.image.load('assets/crystal_seal.png').convert_alpha()
         crystal_seal = Seal(crystal_seal_img, "Crystal Seal",
@@ -128,7 +132,7 @@ class ItemsManager:
 
         self.gather_lp = [twig, blueberry]
         self.mining_lp = [iron_ore, stone]
-        self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 95], [crystal_seal, 50]]
+        self.seal_lp = [[red_seal, 0], [gold_seal, 75], [shadow_seal, 0], [crystal_seal, 50]]
         self.stamp_lp = [[mystic_stamp, 0], [voidcaller_stamp, 50], [primo_stamp, 75]]
         self.shop_common_lp = [[blueberry, 15], [stone, 25]]
         self.shop_uncommon_lp = [[iron_ore, 5], [pickaxe, 3]]

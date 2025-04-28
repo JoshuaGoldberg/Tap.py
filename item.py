@@ -1,4 +1,5 @@
 import copy
+import random
 
 import pygame
 
@@ -58,6 +59,10 @@ class Item:
         bonus = self.calculate_seal_bonus()
         for action in self.equip_action:
             text = text + action.provide_text(bonus + 1) + "\n"
+        for seal in self.seals:
+            if isinstance(seal, EffectSeal):
+                for effect in seal.effects:
+                    text = text + effect.provide_text(bonus + 1) + "\n"
         text = text + self.provide_additional_text()
 
         return text
@@ -67,6 +72,52 @@ class Seal(Item):
     def __init__(self, image, name, description, classification, use_action, equip_action, cost, seal_bonus):
         super().__init__(image, name, description, classification, use_action, equip_action, cost)
         self.seal_bonus = seal_bonus
+
+    def generate_copy(self):
+        new_item = Seal(self.image, self.name, self.description, self.classification, self.use_action,
+                        self.equip_action, self.cost, self.seal_bonus)
+        new_item.id = self.ID
+        self.ID += 1
+        return new_item
+
+
+class EffectSeal(Seal):
+    def __init__(self, image, name, description, classification, use_action, equip_action, cost, seal_bonus,
+                 effect_pool, max_effects, rand):
+        super().__init__(image, name, description, classification, use_action, equip_action, cost, seal_bonus)
+        self.effects = []
+        self.effect_pool = effect_pool
+        self.max_effects = max_effects
+        self.rand = rand
+
+    def generate_copy(self):
+        new_item = EffectSeal(self.image, self.name, self.description, self.classification, self.use_action,
+                              self.equip_action, self.cost, self.seal_bonus, self.effect_pool, self.max_effects,
+                              self.rand)
+        new_item.id = self.ID
+        new_item.effects.clear()
+
+        if self.rand:
+            num_effects = random.randint(1, self.max_effects)
+        else:
+            num_effects = self.max_effects
+
+        while num_effects > 0:
+            selected_item = self.effect_pool[random.randint(0, len(self.effect_pool) - 1)]
+            stop_re_roll = False
+
+            while stop_re_roll is False:
+                re_roll_chance = random.randint(0, 100)
+                if re_roll_chance < selected_item[1]:
+                    selected_item = self.effect_pool[random.randint(0, len(self.effect_pool) - 1)]
+                else:
+                    stop_re_roll = True
+
+            new_item.effects.append(selected_item[0])
+            num_effects -= 1
+
+        self.ID += 1
+        return new_item
 
 
 class BaseBoost:
